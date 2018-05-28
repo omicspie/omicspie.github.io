@@ -7,15 +7,15 @@
     </url>
     
     <url>
-        <loc>http://yoursite-url/about/</loc>
-        <lastmod>2018-05-28T04:21:49.508Z</lastmod>
+        <loc>http://yoursite-url/founder/</loc>
+        <lastmod>2018-05-28T04:27:36.345Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
-        <loc>http://yoursite-url/hexo-theme-beantech.html</loc>
-        <lastmod>2018-05-28T04:06:30.047Z</lastmod>
+        <loc>http://yoursite-url/about/</loc>
+        <lastmod>2018-05-28T04:26:40.093Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
