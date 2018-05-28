@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          R语言爬取HMDB数据库 - omicsPie | 组学派
+        
+    </title>
+
+    <link rel="canonical" href="http://yoursite-url/2017/03/18/2016-12-03-keggandhmdb/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('Demo.png')
+            /*post*/
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/BeanTechSign-white.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#代谢组学" title="代谢组学">代谢组学</a>
+                            
+                              <a class="tag" href="/tags/#R语言" title="R语言">R语言</a>
+                            
+                        </div>
+                        <h1>R语言爬取HMDB数据库</h1>
+                        <h2 class="subheading">R语言爬取HMDB数据库</h2>
+                        <span class="meta">
+                            Posted by omicsPie on
+                            2017-03-18
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">omicsPie</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2><span id="r语言爬虫"><strong>R语言爬虫</strong></span></h2>
+<hr>
+<p>虽然相对于python来说，R语言爬虫并不是那么流行，但是对于比较小的数据爬取量，使用R还是很方便的。R的数据爬取比较流行的是利用XML和RCurl包进行爬取，在这篇博客里面，我就利用XML和RCurl包进行KEGG和HMDB的数据爬取。</p>
+<h2><span id="爬取kegg通路信息"><strong>爬取KEGG通路信息</strong></span></h2>
+<hr>
+<p>因为我需要的信息是KEGG的通路信息，比较简单，也就是每个通路包含哪些代谢物，只要人的metaboloic pathway，因此，我需要先将KEGG中的通路的网页链接拿到。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">library</span><span class="params">(XML)</span></span></span><br><span class="line"><span class="function"><span class="title">library</span><span class="params">(RCurl)</span></span></span><br><span class="line">##从kegg主页上抓取代谢通路的url</span><br><span class="line">URL = getURL(<span class="string">"http://www.genome.jp/kegg/pathway.html#global"</span>)</span><br><span class="line">doc &lt;- htmlParse(URL,encoding=<span class="string">"utf-8"</span>)</span><br><span class="line">xpath<span class="selector-class">.a</span> &lt;- <span class="string">"//a/@href"</span></span><br><span class="line">node &lt;- getNodeSet(doc, xpath.a)</span><br><span class="line">url1 &lt;- sapply(node, as.character)</span><br><span class="line"></span><br><span class="line">xpath<span class="selector-class">.b</span> &lt;- <span class="string">"//a[@href]"</span></span><br><span class="line">name &lt;- getNodeSet(doc, xpath.b)</span><br><span class="line">name &lt;- sapply(name, xmlValue)</span><br><span class="line"></span><br><span class="line">name2 &lt;- name[<span class="number">59</span>:<span class="number">247</span>]</span><br><span class="line">url2 &lt;- url1[<span class="number">59</span>:<span class="number">247</span>]</span><br><span class="line"></span><br><span class="line">url3 &lt;- url2[grep(<span class="string">"show"</span>, url2)]</span><br><span class="line"></span><br><span class="line">pathwat<span class="selector-class">.name</span> &lt;- NULL</span><br><span class="line">metabolite<span class="selector-class">.id</span> &lt;- list()</span><br><span class="line">metabolite<span class="selector-class">.name</span> &lt;- list()</span><br><span class="line"><span class="keyword">for</span> (<span class="selector-tag">i</span> <span class="keyword">in</span> <span class="number">1</span>:length(url3)) &#123;</span><br><span class="line">  cat(paste(<span class="selector-tag">i</span>,<span class="string">"/"</span>,length(url3)))</span><br><span class="line">  cat(<span class="string">"\n"</span>)</span><br><span class="line">  URL &lt;- paste(<span class="string">"http://www.genome.jp"</span>, url3[i], sep = <span class="string">""</span>)</span><br><span class="line">  URL = getURL(URL)</span><br><span class="line">  doc&lt;-htmlParse(URL,encoding=<span class="string">"utf-8"</span>)</span><br><span class="line">  xpath &lt;- <span class="string">"//option[@value='hsa']"</span></span><br><span class="line">  node&lt;-getNodeSet(doc, xpath)</span><br><span class="line">  <span class="keyword">if</span> (length(node) ==<span class="number">0</span> ) &#123;</span><br><span class="line">    cat(<span class="string">"No human pathwat."</span>)</span><br><span class="line">    next()</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    URL &lt;- paste(<span class="string">"http://www.genome.jp"</span>, url3[i], sep = <span class="string">""</span>)</span><br><span class="line">    URL &lt;- gsub(pattern = <span class="string">"map=map"</span>, replacement = <span class="string">"map=hsa"</span>, x = URL)</span><br><span class="line">    doc&lt;-htmlParse(URL,encoding=<span class="string">"utf-8"</span>)</span><br><span class="line">    xpath1 &lt;- <span class="string">"//title"</span></span><br><span class="line">    node&lt;-getNodeSet(doc, xpath1)</span><br><span class="line">    pathway<span class="selector-class">.name</span>[i] &lt;- xmlValue(node[[<span class="number">1</span>]])</span><br><span class="line">    pathway<span class="selector-class">.name</span>[i] &lt;- substr(pathway<span class="selector-class">.name</span>[i], start = <span class="number">2</span>, stop = nchar(pathway<span class="selector-class">.name</span>[i])-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    xpath2 &lt;- <span class="string">"//area[@shape='circle']/@title"</span></span><br><span class="line">    node&lt;-getNodeSet(doc, xpath2)</span><br><span class="line">    metabolite &lt;- lapply(node, function(x) as.character(x))</span><br><span class="line">    metabolite<span class="selector-class">.name</span>[[i]] &lt;- substr(metabolite, start = <span class="number">9</span>, nchar(metabolite)-<span class="number">1</span>)</span><br><span class="line">    metabolite<span class="selector-class">.id</span>[[i]] &lt;- substr(metabolite, start = <span class="number">1</span>, stop = <span class="number">6</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下面对爬取到的代谢通路进行筛选。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">idx &lt;- which(!is.na(pathway.name))</span><br><span class="line">pathway<span class="selector-class">.name1</span> &lt;- pathway<span class="selector-class">.name</span>[idx]</span><br><span class="line">metabolite<span class="selector-class">.id1</span> &lt;- metabolite<span class="selector-class">.id</span>[idx]</span><br><span class="line">metabolite<span class="selector-class">.name1</span> &lt;- metabolite<span class="selector-class">.name</span>[idx]</span><br><span class="line"></span><br><span class="line">pathway<span class="selector-class">.name2</span> &lt;- pathway<span class="selector-class">.name1</span>[-c(<span class="number">83</span>,<span class="number">84</span>)]</span><br><span class="line">metabolite<span class="selector-class">.id2</span> &lt;- metabolite<span class="selector-class">.id1</span>[-c(<span class="number">83</span>,<span class="number">84</span>)]</span><br><span class="line">metabolite<span class="selector-class">.name2</span> &lt;- metabolite<span class="selector-class">.name1</span>[-c(<span class="number">83</span>,<span class="number">84</span>)]</span><br></pre></td></tr></table></figure>
+<p>将爬取到的信息保存输出。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">met<span class="selector-class">.name</span> &lt;- NULL</span><br><span class="line">met<span class="selector-class">.id</span> &lt;- NULL</span><br><span class="line">path<span class="selector-class">.name</span> &lt;- NULL</span><br><span class="line"><span class="function"><span class="title">for</span><span class="params">(i in <span class="number">1</span>:length(pathway.name2)</span></span>) &#123;</span><br><span class="line">  met<span class="selector-class">.name</span>[i] &lt;- paste(metabolite<span class="selector-class">.name2</span>[[i]], collapse = <span class="string">";"</span>)</span><br><span class="line">  met<span class="selector-class">.id</span>[i] &lt;- paste(metabolite<span class="selector-class">.id2</span>[[i]], collapse = <span class="string">";"</span>)</span><br><span class="line">  path<span class="selector-class">.name</span>[i] &lt;- gsub(pattern = <span class="string">"KEGG PATHWAY: "</span>, <span class="string">""</span>, pathway<span class="selector-class">.name2</span>[i])</span><br><span class="line">  path<span class="selector-class">.name</span>[i] &lt;- substr(path<span class="selector-class">.name</span>[i], start = <span class="number">1</span>, stop = nchar(path<span class="selector-class">.name</span>[i])-<span class="number">23</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">kegg &lt;- data.frame(path<span class="selector-class">.name</span>, met<span class="selector-class">.name</span>, met.id)</span><br><span class="line">write.csv(kegg, <span class="string">"kegg.csv"</span>, row<span class="selector-class">.names</span> = F)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">save</span><span class="params">(path.name, file = <span class="string">"path.name"</span>)</span></span></span><br><span class="line"><span class="function"><span class="title">save</span><span class="params">(met.name, file = <span class="string">"met.name"</span>)</span></span></span><br><span class="line"><span class="function"><span class="title">save</span><span class="params">(met.id, file = <span class="string">"met.id"</span>)</span></span></span><br><span class="line"></span><br><span class="line">kegg<span class="selector-class">.met</span> &lt;- list()</span><br><span class="line">kegg<span class="selector-class">.met</span>[[<span class="number">2</span>]] &lt;- sapply(path<span class="selector-class">.name</span>, list)</span><br><span class="line">kegg<span class="selector-class">.met</span>[[<span class="number">1</span>]] &lt;- metabolite.name2</span><br><span class="line">kegg<span class="selector-class">.met</span>[[<span class="number">3</span>]] &lt;- metabolite.id2</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">names</span><span class="params">(kegg.met)</span></span> &lt;- c(<span class="string">"gs"</span>, <span class="string">"pathwaynames"</span>, <span class="string">"metid"</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">save</span><span class="params">(kegg.met, file = <span class="string">"kegg.met"</span>)</span></span></span><br></pre></td></tr></table></figure>
+<h2><span id="爬取hmdb通路信息"><strong>爬取HMDB通路信息</strong></span></h2>
+<hr>
+<p>首先爬取HMDB的通路信息。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line">##抓取HMDB通路信息</span><br><span class="line">library(XML)</span><br><span class="line">library(RCurl)</span><br><span class="line"></span><br><span class="line">hmdb.main &lt;- <span class="string">"http://www.hmdb.ca/pathways?page="</span></span><br><span class="line">hmdb.main &lt;- paste(hmdb.main, c(<span class="number">2</span>:<span class="number">46</span>), sep = <span class="string">""</span>)</span><br><span class="line">hmdb.main &lt;- c(<span class="string">"http://www.hmdb.ca/pathways"</span>, hmdb.main)</span><br><span class="line"></span><br><span class="line">##从HMDB主页上抓取代谢通路的url</span><br><span class="line"><span class="built_in">path</span>.name &lt;- list()</span><br><span class="line">metabolite.id &lt;- list()</span><br><span class="line">spec &lt;- list()</span><br><span class="line"><span class="built_in">path</span>.class &lt;- list()</span><br><span class="line"><span class="keyword">for</span> (i <span class="keyword">in</span> <span class="number">40</span>:length(hmdb.main)) &#123;</span><br><span class="line">  cat(paste(<span class="string">"page"</span>,i))</span><br><span class="line">  cat(<span class="string">":"</span>)</span><br><span class="line">  URL = getURL(hmdb.main[i])</span><br><span class="line">  doc&lt;-htmlParse(URL,encoding=<span class="string">"utf-8"</span>)</span><br><span class="line">  xpath1 &lt;- <span class="string">"//div[@class='panel-heading']"</span></span><br><span class="line">  node1 &lt;- getNodeSet(doc, xpath1)</span><br><span class="line">  pathway.name &lt;- sapply(node1, xmlValue)</span><br><span class="line"></span><br><span class="line">  cat(paste(length(pathway.name), <span class="string">"pathways"</span>))</span><br><span class="line">  cat(<span class="string">"\n"</span>)</span><br><span class="line"></span><br><span class="line">  <span class="built_in">path</span>.name<span class="string">[[i]]</span> &lt;- pathway.name</span><br><span class="line"></span><br><span class="line">  xpath2 &lt;- <span class="string">"//div[@class='panel-body']"</span></span><br><span class="line">  node2 &lt;- getNodeSet(doc, xpath2)</span><br><span class="line"></span><br><span class="line">  metabolite &lt;- sapply(node2, xmlValue)</span><br><span class="line">  metabolite &lt;- unname(sapply(metabolite, <span class="function"><span class="keyword">function</span><span class="params">(x)</span></span> &#123;<span class="built_in">gsub</span>(<span class="string">"Show"</span>, <span class="string">" "</span>, x)&#125;))</span><br><span class="line"></span><br><span class="line">  idx &lt;- sapply(metabolite, <span class="function"><span class="keyword">function</span><span class="params">(x)</span></span> &#123;gregexpr(<span class="string">"HMDB[0-9]&#123;5&#125;"</span>, x)&#125;)</span><br><span class="line"></span><br><span class="line">  met.id &lt;- list()</span><br><span class="line">  <span class="keyword">for</span> (j <span class="keyword">in</span> <span class="number">1</span>:length(idx)) &#123;</span><br><span class="line">    id &lt;- NULL</span><br><span class="line">    <span class="keyword">for</span> (k <span class="keyword">in</span> <span class="number">1</span>:length(idx<span class="string">[[j]]</span>)) &#123;</span><br><span class="line">      id[k] &lt;- substr(metabolite[j], idx<span class="string">[[j]]</span>[k], idx<span class="string">[[j]]</span>[k]+<span class="number">8</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    met.id<span class="string">[[j]]</span> &lt;- id</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  metabolite.id<span class="string">[[i]]</span> &lt;- met.id</span><br><span class="line"></span><br><span class="line">  xpath.a &lt;- <span class="string">"//a[@class='link-out']/@href"</span></span><br><span class="line">  node&lt;-getNodeSet(doc, xpath.a)</span><br><span class="line"></span><br><span class="line">  url1 &lt;- sapply(node, as.character)</span><br><span class="line">  url1 &lt;- substr(url1, start = <span class="number">1</span>, stop = <span class="number">29</span>)</span><br><span class="line">  url1 &lt;- url1[!duplicated(url1)]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  ###获取通路的人种和类别</span><br><span class="line">  species &lt;- NULL</span><br><span class="line">  metabolic &lt;- NULL</span><br><span class="line">  <span class="keyword">for</span> (t <span class="keyword">in</span> <span class="number">1</span>:length(url1)) &#123;</span><br><span class="line">    cat(paste(<span class="string">"t:"</span>,t));cat(<span class="string">" "</span>)</span><br><span class="line">    URL = getURL(url1[t])</span><br><span class="line">    doc &lt;- htmlParse(URL,encoding=<span class="string">"utf-8"</span>)</span><br><span class="line">    xpath &lt;- <span class="string">"//div[@class='species']/text()"</span></span><br><span class="line">    node &lt;- getNodeSet(doc, xpath)</span><br><span class="line">    species[t] &lt;- xmlValue(node<span class="string">[[1]]</span>)</span><br><span class="line"></span><br><span class="line">    xpath &lt;- <span class="string">"//div[@id='des_subject']/text()"</span></span><br><span class="line">    node &lt;- getNodeSet(doc, xpath)</span><br><span class="line">    metabolic[t] &lt;- xmlValue(node<span class="string">[[1]]</span>)</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  spec<span class="string">[[i]]</span> &lt;- species</span><br><span class="line">  <span class="built_in">path</span>.class<span class="string">[[i]]</span> &lt;- metabolic</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对爬取到的代谢通路进行筛选。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">save</span><span class="params">(path.name, file = <span class="string">"path.name"</span>)</span></span></span><br><span class="line"><span class="function"><span class="title">save</span><span class="params">(metabolite.id, file = <span class="string">"metabolite.id"</span>)</span></span></span><br><span class="line"><span class="function"><span class="title">save</span><span class="params">(spec, file = <span class="string">"spec"</span>)</span></span></span><br><span class="line"><span class="function"><span class="title">save</span><span class="params">(path.class, file = <span class="string">"path.class"</span>)</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">pathway<span class="selector-class">.name</span> &lt;- NULL</span><br><span class="line">metabolite<span class="selector-class">.ID</span> &lt;- list()</span><br><span class="line">species &lt;- NULL</span><br><span class="line">pathway<span class="selector-class">.class</span> &lt;- NULL</span><br><span class="line"><span class="keyword">for</span> (<span class="selector-tag">i</span> <span class="keyword">in</span> <span class="number">1</span>:length(path.name)) &#123;</span><br><span class="line">  pathway<span class="selector-class">.name</span> &lt;- c(pathway<span class="selector-class">.name</span>, path<span class="selector-class">.name</span>[[i]])</span><br><span class="line">  metabolite<span class="selector-class">.ID</span> &lt;- c(metabolite<span class="selector-class">.ID</span>, metabolite<span class="selector-class">.id</span>[[i]])</span><br><span class="line">  species &lt;- c(species, spec[[i]])</span><br><span class="line">  pathway<span class="selector-class">.class</span> &lt;- c(pathway<span class="selector-class">.class</span>, path<span class="selector-class">.class</span>[[i]])</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">pathway<span class="selector-class">.class</span> &lt;- substr(x = pathway<span class="selector-class">.class</span>, <span class="number">1</span>, regexpr(<span class="string">"\\\n"</span>, pathway.class)-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">metabolite<span class="selector-class">.name</span> &lt;- list()</span><br><span class="line"><span class="keyword">for</span> (<span class="selector-tag">i</span> <span class="keyword">in</span> <span class="number">1</span>:length(metabolite.ID)) &#123;</span><br><span class="line">  id &lt;- metabolite<span class="selector-class">.ID</span>[[i]]</span><br><span class="line">  idx &lt;- match(id, hmdbdatabase[,<span class="number">1</span>])</span><br><span class="line">  name &lt;- hmdbdatabase[idx,<span class="number">2</span>]</span><br><span class="line">  metabolite<span class="selector-class">.name</span>[[i]] &lt;- name</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">a</span> &lt;- unlist(lapply(metabolite<span class="selector-class">.name</span>, function(x) &#123;paste(x, collapse = <span class="string">";"</span>)&#125;))</span><br><span class="line"><span class="selector-tag">b</span> &lt;- unlist(lapply(metabolite<span class="selector-class">.ID</span>, function(x) &#123;paste(x, collapse = <span class="string">";"</span>)&#125;))</span><br><span class="line"></span><br><span class="line">idx &lt;- grep(<span class="string">"Metabolic"</span>, pathway.class)</span><br><span class="line"></span><br><span class="line">metabolite<span class="selector-class">.name</span> &lt;- metabolite<span class="selector-class">.name</span>[idx]</span><br><span class="line">metabolite<span class="selector-class">.ID</span> &lt;- metabolite<span class="selector-class">.ID</span>[idx]</span><br><span class="line">pathway<span class="selector-class">.name</span> &lt;- pathway<span class="selector-class">.name</span>[idx]</span><br><span class="line">pathway<span class="selector-class">.class</span> &lt;- pathway<span class="selector-class">.class</span>[idx]</span><br><span class="line">species &lt;- species[idx]</span><br><span class="line"></span><br><span class="line">hmdb<span class="selector-class">.pathway</span> &lt;- data.frame(pathway<span class="selector-class">.name</span>, pathway<span class="selector-class">.class</span>,<span class="selector-tag">a</span>, b)[idx,]</span><br><span class="line">write.csv(hmdb<span class="selector-class">.pathway</span>, <span class="string">"hmdb.pathway.csv"</span>)</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">a</span> &lt;- list()</span><br><span class="line"><span class="keyword">for</span> (<span class="selector-tag">i</span> <span class="keyword">in</span> <span class="number">1</span>:length(pathway.name)) &#123;</span><br><span class="line">  <span class="selector-tag">a</span>[[i]] &lt;- pathway<span class="selector-class">.name</span>[i]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">pathway<span class="selector-class">.name</span> &lt;- a</span><br><span class="line"></span><br><span class="line">hmdb<span class="selector-class">.met</span> &lt;- list(gs = metabolite<span class="selector-class">.name</span>, pathwaynames = pathway<span class="selector-class">.name</span>, id = metabolite.ID)</span><br><span class="line"><span class="function"><span class="title">save</span><span class="params">(hmdb.met, file = <span class="string">"hmdb.met"</span>)</span></span></span><br></pre></td></tr></table></figure>
+<h2><span id="爬取hmdb代谢物信息"><strong>爬取HMDB代谢物信息</strong></span></h2>
+<hr>
+<p>首先，获得所有代谢物的页面链接。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">###抓取HMDB代谢物信息</span><br><span class="line"><span class="function"><span class="title">library</span><span class="params">(XML)</span></span></span><br><span class="line"><span class="function"><span class="title">library</span><span class="params">(RCurl)</span></span></span><br><span class="line"></span><br><span class="line">hmdb<span class="selector-class">.main</span> &lt;- <span class="string">"http://www.hmdb.ca/metabolites?c=hmdb_id&amp;d=up&amp;page="</span></span><br><span class="line">hmdb<span class="selector-class">.main</span> &lt;- paste(hmdb<span class="selector-class">.main</span>, c(<span class="number">2</span>:<span class="number">1681</span>), sep = <span class="string">""</span>)</span><br><span class="line">hmdb<span class="selector-class">.main</span> &lt;- c(<span class="string">"http://www.hmdb.ca/metabolites"</span>, hmdb.main)</span><br><span class="line"></span><br><span class="line">##从HMDB主页上抓取代谢物的url</span><br><span class="line">url &lt;- NULL</span><br><span class="line"><span class="keyword">for</span> (<span class="selector-tag">i</span> <span class="keyword">in</span> <span class="number">1</span>:length(hmdb.main)) &#123;</span><br><span class="line">  cat(i)</span><br><span class="line">  cat(<span class="string">" "</span>)</span><br><span class="line">  URL = getURL(hmdb<span class="selector-class">.main</span>[i])</span><br><span class="line">  doc&lt;-htmlParse(URL,encoding=<span class="string">"utf-8"</span>)</span><br><span class="line">  xpath &lt;- <span class="string">"//a[@href]/@href"</span></span><br><span class="line">  node&lt;-getNodeSet(doc, xpath)</span><br><span class="line">  url1 &lt;- sapply(node, as.character)</span><br><span class="line">  url1 &lt;- url1[grep(<span class="string">"metabolites/HMDB"</span>, url1)]</span><br><span class="line">  url1 &lt;- unique(url1)</span><br><span class="line">  url &lt;- c(url, url1)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">url1 &lt;- paste(<span class="string">"http://www.hmdb.ca/"</span>,url, sep = <span class="string">""</span>)</span><br><span class="line"><span class="function"><span class="title">save</span><span class="params">(url1, file = <span class="string">"url1"</span>)</span></span></span><br></pre></td></tr></table></figure>
+<p>下面开始进行代谢物信息爬取。</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">library(mailR)</span><br><span class="line"><span class="keyword">for</span> (i <span class="keyword">in</span> 1:400) &#123;</span><br><span class="line">  cat(paste((i-1)<span class="number">*100</span>+1,<span class="string">"-"</span>,i<span class="number">*100</span>,<span class="string">"/"</span>, length(url1), sep = <span class="string">""</span>))</span><br><span class="line">  cat(<span class="string">"\n"</span>)</span><br><span class="line">  URL &lt;- getURL(url1[((i-1)<span class="number">*100</span>+1):(i<span class="number">*100</span>)])</span><br><span class="line">  doc &lt;- htmlParse(URL, <span class="attribute">encoding</span>=<span class="string">"utf-8"</span>)</span><br><span class="line">  xpath1 &lt;- <span class="string">"//tr"</span></span><br><span class="line">  node1 &lt;- getNodeSet(doc, xpath1)</span><br><span class="line">  node1 &lt;- sapply(node1, xmlValue)</span><br><span class="line"></span><br><span class="line">  HMDB_ID[((i-1)<span class="number">*100</span>+1):(i<span class="number">*100</span>)] &lt;-</span><br><span class="line">    gsub(pattern = <span class="string">"HMDB ID"</span>, replacement = <span class="string">""</span>,node1[grep(<span class="string">"HMDB ID"</span>, node1)])</span><br><span class="line"></span><br><span class="line">  Common_Name[((i-1)<span class="number">*100</span>+1):(i<span class="number">*100</span>)] &lt;-</span><br><span class="line">    gsub(<span class="string">"Common Name"</span>, <span class="string">""</span>,node1[grep(<span class="string">"Common Name"</span>, node1)])</span><br><span class="line"></span><br><span class="line">  temp &lt;- gsub(<span class="string">"SynonymsValueSource"</span>, <span class="string">""</span>,node1[grep(<span class="string">"Synonyms"</span>, node1)])</span><br><span class="line">  temp &lt;- gsub(<span class="string">"Generator"</span>, <span class="string">";"</span>,temp)</span><br><span class="line">  temp &lt;- gsub(<span class="string">"ChEMBL"</span>, <span class="string">";"</span>,temp)</span><br><span class="line">  temp &lt;- gsub(<span class="string">"ChEBI"</span>, <span class="string">";"</span>,temp)</span><br><span class="line">  Synonyms[((i-1)<span class="number">*100</span>+1):(i<span class="number">*100</span>)] &lt;-</span><br><span class="line">    gsub(<span class="string">"HMDB"</span>, <span class="string">";"</span>,temp)</span><br><span class="line"></span><br><span class="line">  Chemical_Formula[((i-1)<span class="number">*100</span>+1):(i<span class="number">*100</span>)] &lt;-</span><br><span class="line">    gsub(<span class="string">"Chemical Formula"</span>, <span class="string">""</span>,node1[grep(<span class="string">"Chemical Formula"</span>, node1)])</span><br><span class="line"></span><br><span class="line">  Monoisotopic_Molecular_Weight[((i-1)<span class="number">*100</span>+1):(i<span class="number">*100</span>)] &lt;-</span><br><span class="line">    gsub(<span class="string">"Monoisotopic Molecular Weight"</span>, <span class="string">""</span>,node1[grep(<span class="string">"Monoisotopic Molecular Weight"</span>, node1)])</span><br><span class="line"></span><br><span class="line">  IUPAC_Name[((i-1)<span class="number">*100</span>+1):(i<span class="number">*100</span>)] &lt;-</span><br><span class="line">    gsub(<span class="string">"IUPAC Name"</span>, <span class="string">""</span>,node1[grep(<span class="string">"IUPAC Name"</span>, node1)])</span><br><span class="line"></span><br><span class="line">  Traditional_Name[((i-1)<span class="number">*100</span>+1):(i<span class="number">*100</span>)] &lt;-</span><br><span class="line">    gsub(<span class="string">"Traditional Name"</span>, <span class="string">""</span>,node1[grep(<span class="string">"Traditional Name"</span>, node1)])</span><br><span class="line"></span><br><span class="line">  CAS_Registry_Number[((i-1)<span class="number">*100</span>+1):(i<span class="number">*100</span>)] &lt;-</span><br><span class="line">    gsub(<span class="string">"CAS Registry Number"</span>, <span class="string">""</span>,node1[grep(<span class="string">"CAS Registry Number"</span>, node1)])</span><br><span class="line"></span><br><span class="line">  Origin[((i-1)<span class="number">*100</span>+1):(i<span class="number">*100</span>)] &lt;-</span><br><span class="line">    gsub(<span class="string">"Origin"</span>, <span class="string">""</span>,node1[grep(<span class="string">"Origin"</span>, node1)])</span><br><span class="line"></span><br><span class="line">  path &lt;- gsub(<span class="string">"PathwaysNameSMPDB LinkKEGG Link"</span>, <span class="string">""</span>,node1[grep(<span class="string">"Pathways"</span>, node1)])</span><br><span class="line">  Pathways[((i-1)<span class="number">*100</span>+1):(i<span class="number">*100</span>)] &lt;-</span><br><span class="line">    substr(path, 1, stop = regexpr(<span class="string">"SMP"</span>, path)-1)</span><br><span class="line"></span><br><span class="line">  ##每100次保存一次</span><br><span class="line">  <span class="keyword">if</span> (i<span class="number">*100</span> %<span class="keyword">in</span>% seq(100, 60000, by = 100)) &#123;</span><br><span class="line">    cat(<span class="string">"save data...\n"</span>)</span><br><span class="line">    save(HMDB_ID,</span><br><span class="line">         Common_Name,</span><br><span class="line">         Synonyms,</span><br><span class="line">         Chemical_Formula,</span><br><span class="line">         Monoisotopic_Molecular_Weight,</span><br><span class="line">         IUPAC_Name,</span><br><span class="line">         Traditional_Name,</span><br><span class="line">         CAS_Registry_Number,</span><br><span class="line">         Origin,</span><br><span class="line">         Pathways,</span><br><span class="line">         file = paste(<span class="string">"hmdb.data"</span>,i<span class="number">*100</span>))</span><br><span class="line"></span><br><span class="line">    send.mail(<span class="keyword">from</span> = <span class="string">"yourmail1@163.com"</span>,</span><br><span class="line">              <span class="keyword">to</span> = c(<span class="string">"youmail20@163.com"</span>),</span><br><span class="line">              subject = paste(<span class="string">"WZZ GO ON:"</span>, i),</span><br><span class="line">              body = paste(<span class="string">"WZZ still go on"</span>, i),</span><br><span class="line">              smtp = list(host.name = <span class="string">"smtp.163.com"</span>,<span class="built_in"> port </span>= 465, user.name = <span class="string">"yourmail1"</span>, passwd = <span class="string">"passward"</span>, ssl = <span class="literal">TRUE</span>),</span><br><span class="line">              authenticate = <span class="literal">TRUE</span>,</span><br><span class="line">              send = <span class="literal">TRUE</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>因为代谢物信息比较大，可能需要一晚上，因此想到了没爬取100个，就给自己发一封邮件，来对程序进行监控。</p>
+<p>写的比较粗糙，有时间再好好修改一下。</p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2017/03/18/hexo-theme-beantech/" data-toggle="tooltip" data-placement="top" title="[Hexo] Theme BeanTech">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">R语言爬虫</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">爬取KEGG通路信息</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">爬取HMDB通路信息</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">爬取HMDB代谢物信息</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#代谢组学" title="代谢组学">代谢组学</a>
+                        
+                          <a class="tag" href="/tags/#R语言" title="R语言">R语言</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://shenxt.me/" target="_blank">Shen blog</a></li>
+                    
+                        <li><a href="http://www.zhulab.cn/" target="_blank">Zhu lab</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "your-disqus-ID";
+    var disqus_identifier = "http://yoursite-url/2017/03/18/2016-12-03-keggandhmdb/";
+    var disqus_url = "http://yoursite-url/2017/03/18/2016-12-03-keggandhmdb/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/omicspie">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; omicsPie 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://yoursite-url/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://yoursite-url/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

@@ -9,8 +9,57 @@
     </url>
 
     <url>
+        <loc>http://yoursite-url/tags/Chinese/</loc>
+        <lastmod>2018-05-28T01:18:06.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite-url/tags/Github/</loc>
+        <lastmod>2018-05-28T01:18:06.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://yoursite-url/tags/Blog/</loc>
-        <lastmod>2018-05-28T00:34:03.900Z</lastmod>
+        <lastmod>2018-05-28T01:18:06.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite-url/tags/R/</loc>
+        <lastmod>2018-05-28T01:18:06.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite-url/tags/Metabolomics/</loc>
+        <lastmod>2018-05-28T01:18:06.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite-url/tags/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/</loc>
+        <lastmod>2018-05-28T01:20:15.585Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite-url/tags/%E4%BB%A3%E8%B0%A2%E7%BB%84%E5%AD%A6/</loc>
+        <lastmod>2018-05-28T01:21:32.833Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite-url/tags/R%E8%AF%AD%E8%A8%80/</loc>
+        <lastmod>2018-05-28T01:21:32.833Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
