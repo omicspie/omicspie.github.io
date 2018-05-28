@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="sitemap.xsl"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>http://yoursite-url</loc>
+        <loc>https://omicspie.com</loc>
         <changefreq>daily</changefreq>
         <priority>1</priority>
     </url>
     
     <url>
-        <loc>http://yoursite-url/founder/</loc>
-        <lastmod>2018-05-28T04:37:35.518Z</lastmod>
+        <loc>https://omicspie.com/about/</loc>
+        <lastmod>2018-05-28T05:49:57.553Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
-        <loc>http://yoursite-url/about/</loc>
-        <lastmod>2018-05-28T04:35:17.771Z</lastmod>
+        <loc>https://omicspie.com/archive/</loc>
+        <lastmod>2018-05-28T05:24:54.053Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
-        <loc>http://yoursite-url/archive/</loc>
-        <lastmod>2018-05-28T01:15:42.053Z</lastmod>
+        <loc>https://omicspie.com/tags/</loc>
+        <lastmod>2018-05-28T05:23:32.985Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
-        <loc>http://yoursite-url/tags/</loc>
-        <lastmod>2018-05-28T00:34:03.924Z</lastmod>
+        <loc>https://omicspie.com/founder/</loc>
+        <lastmod>2018-05-28T05:11:16.475Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
-        <loc>http://yoursite-url/404.html</loc>
+        <loc>https://omicspie.com/404.html</loc>
         <lastmod>2018-05-28T00:34:03.900Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
