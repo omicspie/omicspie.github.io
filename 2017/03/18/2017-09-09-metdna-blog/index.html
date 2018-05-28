@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          MetDNA instruction - omicsPie | 组学派
+        
+    </title>
+
+    <link rel="canonical" href="http://yoursite-url/2017/03/18/2017-09-09-metdna-blog/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('Demo.png')
+            /*post*/
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/BeanTechSign-white.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#代谢组学" title="代谢组学">代谢组学</a>
+                            
+                              <a class="tag" href="/tags/#R语言" title="R语言">R语言</a>
+                            
+                              <a class="tag" href="/tags/#代谢物鉴定" title="代谢物鉴定">代谢物鉴定</a>
+                            
+                        </div>
+                        <h1>MetDNA instruction</h1>
+                        <h2 class="subheading">MetDNA instruction</h2>
+                        <span class="meta">
+                            Posted by omicsPie on
+                            2017-03-18
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">omicsPie</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/hexo-theme-beantech.html">[Hexo] Theme BeanTech</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">关于组学派 | omicsPie</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p><img src="logo.png" alt=""></p>
+<hr>
+<h3><span id="i数据准备"><strong>Ⅰ数据准备</strong></span></h3>
+<h4><span id="metdna需要准备的数据包括一级数据peak-tablecsv格式二级数据mgf格式和样品信息sampleinfocsv格式-点击下载正离子demo数据和负离子demo数据">MetDNA需要准备的数据包括一级数据peak table(csv格式)，二级数据(mgf格式)(csv格式)。点击下载和。</span></h4>
+<h4><span id="table-1-demo数据信息"><strong>Table 1: demo数据信息</strong></span></h4>
+<table>
+<thead>
+<tr>
+<th>组别</th>
+<th>个数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>QC</td>
+<td>8</td>
+<td>QC</td>
+</tr>
+<tr>
+<td>W03</td>
+<td>10</td>
+<td>野生型3天</td>
+</tr>
+<tr>
+<td>W30</td>
+<td>10</td>
+<td>野生型30天</td>
+</tr>
+<tr>
+<td>E03</td>
+<td>10</td>
+<td>突变型E3天</td>
+</tr>
+<tr>
+<td>E30</td>
+<td>10</td>
+<td>突变型E30天</td>
+</tr>
+<tr>
+<td>P03</td>
+<td>10</td>
+<td>突变型P3天</td>
+</tr>
+<tr>
+<td>P30</td>
+<td>10</td>
+<td>突变型P30天</td>
+</tr>
+</tbody>
+</table>
+<h3><span id="1-一级数据"><strong>1. 一级数据</strong></span></h3>
+<h4><span id="一级数据可以是使用xcmsmzminems-dial或者其他软件处理之后的数据-第一列为代谢物峰的名字name第二列为quotmzquot第三列为保留时间rt且单位必须为秒其他为样品的峰强度">一级数据可以是使用XCMS，MZmine，MS-DIAL或者其他软件处理之后的数据。第一列为代谢物峰的名字，“name”，第二列为&quot;mz&quot;，第三列为保留时间(RT)，<strong>且单位必须为秒</strong>，其他为样品的峰强度。</span></h4>
+<p><img src="data.example.png" alt="Figure 1: 一级数据peak table格式示例"></p>
+<h3><span id="2-二级数据"><strong>2. 二级数据</strong></span></h3>
+<h4><span id="二级质谱原始数据可以是使用qc样品采集的dda或者targeted-msms数据-对于dda数据来说也可以是分段采集的二级数据-质谱原始二级数据需要使用proteowizard软件转为mgf格式转换时参数设置参考下图-二级数据最多不能超过十个">二级质谱原始数据可以是使用QC样品采集的DDA或者targeted MS/MS数据。对于DDA数据来说，也可以是分段采集的二级数据。质谱原始二级数据需要使用ProteoWizard软件转为mgf格式，转换时参数设置参考下图。二级数据最多不能超过十个。</span></h4>
+<p><a href="ProteoWizard.png"><strong>Figure 2: ProteoWizard参数设置</strong></a></p>
+<h3><span id="3-样品信息"><strong>3. 样品信息</strong></span></h3>
+<h4><span id="样品信息是样品的分组信息-第一列是样品名samplename第二列是样品的分组信息group">样品信息是样品的分组信息。第一列是样品名，“”，第二列是样品的分组信息，“group”。</span></h4>
+<p><img src="sample.info%E7%A4%BA%E4%BE%8B.png" alt="Figure 3：样品信息示例"></p>
+<hr>
+<h3><span id="ii-数据整理"><strong>Ⅱ 数据整理</strong></span></h3>
+<h4><span id="如果是正离子数据请建立一个新的文件夹命名为quotposquot如果是负离子数据请建立一个新的文件夹命名为quotnegquot然后将一级数据二级数据和样品信息放置于此文件夹下-并将该文件夹设置为工作路径-现在metdna部署在小服务器上因此可以将数据放在小服务器中labdata-例如quotvworkreport申小涛demoflyposquot">如果是正离子数据，请建立一个新的文件夹，命名为&quot;POS&quot;，如果是负离子数据，请建立一个新的文件夹命名为&quot;NEG&quot;，然后将一级数据，二级数据和样品信息放置于此文件夹下。并将该文件夹设置为工作路径。现在<em>MetDNA</em>部署在小服务器上，因此可以将数据放在小服务器中(labdata)。例如&quot;V:/workreport/申小涛/demo/fly/POS&quot;。</span></h4>
+<p><img src="%E6%95%B0%E6%8D%AE%E6%95%B4%E7%90%86.png" alt="Figure 4: 将所需数据放置在文件夹中"></p>
+<h4><span id="设置工作路径">设置工作路径。</span></h4>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">setwd</span><span class="params">(<span class="string">"/mnt/data/samba/labdata/workreport/申小涛/demo/fly/POS"</span>)</span></span></span><br><span class="line"><span class="function"><span class="title">library</span><span class="params">(MetDNA)</span></span></span><br></pre></td></tr></table></figure>
+<hr>
+<h3><span id="iii-数据处理"><strong>Ⅲ 数据处理</strong></span></h3>
+<h3><span id="1-只对正离子或者负离子处理"><strong>1. 只对正离子或者负离子处理</strong></span></h3>
+<h4><span id="所有的步骤可以使用一个函数metdna全部完成">所有的步骤可以使用一个函数<em>MetDNA</em>全部完成。</span></h4>
+<h4><span id="运行函数metdna">运行函数<em>MetDNA</em>。</span></h4>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">MetDNA(ms1<span class="selector-class">.file</span> = <span class="string">"data.csv"</span>,</span><br><span class="line">       polarity = <span class="string">"positive"</span>,</span><br><span class="line">       column = <span class="string">"hilic"</span>,</span><br><span class="line">       ce = <span class="string">"30"</span>,</span><br><span class="line">       prefer<span class="selector-class">.adduct</span> = <span class="string">"M+H"</span>,</span><br><span class="line">       use<span class="selector-class">.default</span><span class="selector-class">.md</span> = TRUE,</span><br><span class="line">       threads = <span class="number">3</span>,</span><br><span class="line">       group = c(<span class="string">"W03"</span>, <span class="string">"W30"</span>),</span><br><span class="line">       uni<span class="selector-class">.test</span> = <span class="string">"t"</span>,</span><br><span class="line">       correct = TRUE,</span><br><span class="line">       <span class="selector-tag">p</span><span class="selector-class">.cutoff</span> = <span class="number">0.01</span>,</span><br><span class="line">       species = <span class="string">"dme"</span>)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>参数含义如下：</strong></p>
+</blockquote>
+<ul>
+<li>
+<h4><span id="ms1file一级数据的名字">ms1.file：一级数据的名字。</span></h4>
+</li>
+<li>
+<h4><span id="polarity数据采集极性positivequot或者quotnegative">polarity：数据采集极性，“positive&quot;或者&quot;negative”。</span></h4>
+</li>
+<li>
+<h4><span id="column使用的柱子类型hilicquot或者quotrp">column：使用的柱子类型，“hilic&quot;或者&quot;rp”。</span></h4>
+</li>
+<li>
+<h4><span id="ce二级采集的碰撞能量支持quot10quot15202530353515-351540-455055606570">ce：二级采集的碰撞能量，支持&quot;10&quot;，“15”，“20”，“25”，“30”，“35”，“35,15” (35±15)，“40”， “45”，“50”，“55”，“60”，“65”，“70”。</span></h4>
+</li>
+<li>
+<h4><span id="preferadduct使用那些加合物形式的注释用于rt预测模型的建立默认使用所有的注释推荐正离子模式下使用quotmhquot负离子模式下使用quotm-hquot">prefer.adduct：使用那些加合物形式的注释用于RT预测模型的建立，默认使用所有的注释，推荐正离子模式下使用&quot;M+H&quot;，负离子模式下使用&quot;M-H&quot;。</span></h4>
+</li>
+<li>
+<h4><span id="usedefaultmd进行保留时间预测模型建立时是否使用默认的分子描述符如果设置为false则会根据你的数据自动选择分子描述符">：进行保留时间预测模型建立时，是否使用默认的分子描述符，如果设置为FALSE，则会根据你的数据自动选择分子描述符。</span></h4>
+</li>
+<li>
+<h4><span id="threads使用线程数默认为3可以根据电脑本身配置进行修改">threads：使用线程数，默认为3，可以根据电脑本身配置进行修改。</span></h4>
+</li>
+<li>
+<h4><span id="group要对哪些分组的样品进行分析注意计算fold-change时使用后面的样品除以前面的样品">group：要对哪些分组的样品进行分析，<strong>注意</strong>，计算fold change时，使用后面的样品除以前面的样品。</span></h4>
+</li>
+<li>
+<h4><span id="unitest单变量分析的方法tstudent-t-testwilcoxwilcox-test">uni.test：单变量分析的方法，“t”，Student t test；“wilcox”，Wilcox test。</span></h4>
+</li>
+<li>
+<h4><span id="correct是否需要对p值进行fdr校正">correct：是否需要对p值进行FDR校正。</span></h4>
+</li>
+<li>
+<h4><span id="pcutoff选择dysregulated-peak时的p值cutoff">p.cutoff：选择dysregulated peak时的p值cutoff。</span></h4>
+</li>
+<li>
+<h4><span id="species所研究样品的物种来源dme果蝇hsa人类mmu小鼠rat大鼠bta牛ggagallus-gallus-鸡dredanio-rerio-斑马鱼celcaenorharomyces-elegans-线虫scesaccharomyces-cerevisaiae-酵母-atharabidopsis-thaliana-拟南芥smmschistosoma-mansonipfaplasmodum-falciparum-3d7tbrtrypanosoma-bruceieco-escherichia-coli-k-12-mg1655大肠杆菌ppupseudomonas-putida-kt2440syfsynechococcus-elongatus">species：所研究样品的物种来源，“dme”，果蝇；“hsa”，人类；“mmu”，小鼠；“rat”，大鼠，“bta”，牛；“gga”，Gallus gallus (鸡)；“dre”，Danio rerio (斑马鱼)；“cel”，Caenorharomyces elegans (线虫)；“sce”，Saccharomyces cerevisaiae (酵母)； “ath”，Arabidopsis thaliana (拟南芥)；“smm”，Schistosoma mansoni；“pfa”，Plasmodum falciparum 3D7；“tbr”，Trypanosoma brucei；“eco”， Escherichia coli K-12 MG1655(大肠杆菌)；“ppu”，Pseudomonas putida KT2440；“syf”，Synechococcus elongatus。</span></h4>
+</li>
+</ul>
+<h3><span id="2-对正负数据合并分析"><strong>2. 对正负数据合并分析</strong></span></h3>
+<h4><span id="正负离子分别处理之后可以使用函数metmodule2函数合并正负离子模式的鉴定结果进行dysregulated-network-analysis">正负离子分别处理之后，可以使用函数<em>metModule2</em>函数合并正负离子模式的鉴定结果，进行dysregulated network analysis。</span></h4>
+<h4><span id="运行函数metmodule2">运行函数<em>MetModule2</em></span></h4>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">metModule2</span><span class="params">(group = c(<span class="string">"W03"</span>, <span class="string">"W30"</span>)</span></span>,</span><br><span class="line">           uni<span class="selector-class">.test</span> = <span class="string">"t"</span>,</span><br><span class="line">           column = <span class="string">"hilic"</span>,</span><br><span class="line">           correct = TRUE,</span><br><span class="line">           <span class="selector-tag">p</span><span class="selector-class">.cutoff</span> = <span class="number">0.01</span>,</span><br><span class="line">           threads = <span class="number">3</span>,</span><br><span class="line">           species = <span class="string">"dme"</span>)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>参数含义如下：</strong></p>
+</blockquote>
+<ul>
+<li>
+<h4><span id="group要对哪些分组的样品进行分析注意计算fold-change时使用后面的样品除以前面的样品">group：要对哪些分组的样品进行分析，<strong>注意</strong>，计算fold change时，使用后面的样品除以前面的样品。</span></h4>
+</li>
+<li>
+<h4><span id="unitest单变量分析的方法tstudent-t-testwilcoxwilcox-test">uni.test：单变量分析的方法，“t”，Student t test；“wilcox”，Wilcox test。</span></h4>
+</li>
+<li>
+<h4><span id="column使用的柱子类型hilicquot或者quotrp">column：使用的柱子类型，“hilic&quot;或者&quot;rp”。</span></h4>
+</li>
+<li>
+<h4><span id="correct是否需要对p值进行fdr校正">correct：是否需要对p值进行FDR校正。</span></h4>
+</li>
+<li>
+<h4><span id="pcutoff选择dysregulated-peak时的p值cutoff">p.cutoff：选择dysregulated peak时的p值cutoff。</span></h4>
+</li>
+<li>
+<h4><span id="threads使用线程数默认为3可以根据电脑本身配置进行修改">threads：使用线程数，默认为3，可以根据电脑本身配置进行修改。</span></h4>
+</li>
+<li>
+<h4><span id="species所研究样品的物种来源dme果蝇hsa人类mmu小鼠rat大鼠bta牛ggagallus-gallus-鸡dredanio-rerio-斑马鱼celcaenorharomyces-elegans-线虫scesaccharomyces-cerevisaiae-酵母-atharabidopsis-thaliana-拟南芥smmschistosoma-mansonipfaplasmodum-falciparum-3d7tbrtrypanosoma-bruceieco-escherichia-coli-k-12-mg1655大肠杆菌ppupseudomonas-putida-kt2440syfsynechococcus-elongatus">species：所研究样品的物种来源，“dme”，果蝇；“hsa”，人类；“mmu”，小鼠；“rat”，大鼠，“bta”，牛；“gga”，Gallus gallus (鸡)；“dre”，Danio rerio (斑马鱼)；“cel”，Caenorharomyces elegans (线虫)；“sce”，Saccharomyces cerevisaiae (酵母)； “ath”，Arabidopsis thaliana (拟南芥)；“smm”，Schistosoma mansoni；“pfa”，Plasmodum falciparum 3D7；“tbr”，Trypanosoma brucei；“eco”， Escherichia coli K-12 MG1655(大肠杆菌)；“ppu”，Pseudomonas putida KT2440；“syf”，Synechococcus elongatus。</span></h4>
+</li>
+</ul>
+<h4><span id="运行函数analysisreport得到分析报告">运行函数<em>analysisReport</em>得到分析报告。</span></h4>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">analysisReport</span><span class="params">(polarity = <span class="string">"both"</span>)</span></span></span><br></pre></td></tr></table></figure>
+<hr>
+<h3><span id="iv-运行结果"><strong>Ⅳ 运行结果</strong></span></h3>
+<h3><span id="1-正离子或者负离子的运行结果"><strong>1. 正离子或者负离子的运行结果</strong></span></h3>
+<h4><span id="metdna函数运行结束之后所有的运行结果都存放在设置的路径中包含二级谱图匹配结果mrn注释结果dysregulated-network分析结果以及分析报告-如图5所示"><strong>MetDNA</strong>函数运行结束之后，所有的运行结果都存放在设置的路径中，包含二级谱图匹配结果，MRN注释结果，dysregulated network分析结果以及分析报告。如图5所示。</span></h4>
+<p><img src="analysis.result.png" alt="Figure 5: 运行结果"></p>
+<h3><span id="1-metdnaparameterscsv"><strong>(1) MetDNA.parameters.csv</strong></span></h3>
+<h4><span id="记录此次运行所使用的参数">记录此次运行所使用的参数。</span></h4>
+<p><img src="MetDNA.parameters.png" alt="Figure 6: 参数记录"></p>
+<h3><span id="2-ms2_match_result_pos"><strong>(2) ms2_match_result_POS</strong></span></h3>
+<h4><span id="二级谱图匹配结果-包括一个csv文件ms2matchannotationresultcsv和一个文件夹ms2_match_spectra-ms2macthannotationresultcsv是二级谱图匹配之后的结果与metanalyzer处理之后的结果相同ms2_match_spectra文件夹中包含了所有二级匹配图figure-6">二级谱图匹配结果。包括一个csv文件，ms2.match.annotation.result.csv和一个文件夹，MS2_match_spectra。ms2.macth.annotation.result.csv是二级谱图匹配之后的结果，与MetAnalyzer处理之后的结果相同；MS2_match_spectra文件夹中包含了所有二级匹配图(Figure 6)。</span></h4>
+<p><img src="%E4%BA%8C%E7%BA%A7%E5%8C%B9%E9%85%8D%E5%9B%BE.png" alt="Figure 7: 二级谱图匹配图"></p>
+<h3><span id="3-mrn_annotation_result_pos"><strong>(3) MRN_annotation_result_POS</strong></span></h3>
+<h4><span id="基于metabolic-reacion-network注释结果-包括两个csv文件metabmparameterscsv和mrnannotationresultcsv-mrnannotationresultcsv是使用mrn注释结果figure-8">基于metabolic reacion network注释结果。包括两个csv文件，metABM.parameters.csv和MRN.annotation.result.csv。MRN.annotation.result.csv是使用MRN注释结果(Figure 8)。</span></h4>
+<p><img src="MRN.annotation.result.png" alt="Figure 8: MRN annotation result"></p>
+<h4><span id="其中">其中：</span></h4>
+<ul>
+<li>
+<h4><span id="annotationfromid该peak的该注释来自于哪个metaboliteid">：该peak的该注释来自于哪个metabolite(ID);</span></h4>
+</li>
+<li>
+<h4><span id="annotationfrompeak该peak的该注释来自于哪个peak">annotation.from.peak：该peak的该注释来自于哪个peak;</span></h4>
+</li>
+<li>
+<h4><span id="id注释代谢物结果的kegg-id">ID：注释代谢物结果的KEGG ID;</span></h4>
+</li>
+<li>
+<h4><span id="compoundname注释结果的名字">：注释结果的名字；</span></h4>
+</li>
+<li>
+<h4><span id="isotope同位素信息">isotope：同位素信息；</span></h4>
+</li>
+<li>
+<h4><span id="adduct加合物信息">adduct：加合物信息；</span></h4>
+</li>
+<li>
+<h4><span id="formula化学结构式">Formula：化学结构式；</span></h4>
+</li>
+<li>
+<h4><span id="score注释打分">score：注释打分；</span></h4>
+</li>
+<li>
+<h4><span id="peakgrouppeak-group">peak.group：peak group；</span></h4>
+</li>
+<li>
+<h4><span id="confidence对注释的peak-group打分">confidence：对注释的peak group打分。</span></h4>
+</li>
+</ul>
+<h3><span id="4-dysregulated_network_analsysi_result_pos"><strong>(4) Dysregulated_network_analsysi_result_POS</strong></span></h3>
+<h4><span id="dysregulated-network分析的结果-其中包括一个pdf文件volcanoplotpdffigure-9两个csv文件metmoduleparameterscsv和dnaannotationresultcsv以及两个文件夹module_informationfigure-10和pathway_inforamtion-figure-11">Dysregulated network分析的结果。其中包括一个pdf文件，volcano.plot.pdf(Figure: 9)，两个csv文件，metModule.parameters.csv和DNA.annotation.result.csv以及两个文件夹，module_information(Figure 10)和pathway_inforamtion (Figure 11)。</span></h4>
+<h4><span id="1-volcanoplot是选取差异代谢物峰的火山图">1) volcano.plot是选取差异代谢物峰的火山图。</span></h4>
+<p><img src="volcano.plot.png" alt="Figure 9: Volcano plot"></p>
+<h4><span id="2-dnaannotationresultcsv是通过dysregulated-network对注释结果进行筛选以及kegg-database注释之后的注释结果">2) DNA.annotation.result.csv是通过dysregulated network对注释结果进行筛选以及KEGG database注释之后的注释结果。</span></h4>
+<h4><span id="3-module_information文件夹中包含了dysregulated-module的分析结果-其中moduleresultcsv是module的信息-moduleoverviewpdf是module结果的总览figure-10-moduleheatmappdf是对module进行定量分析之后的热图figure-11-boxplot文件夹中包含了module在两组间的定量结果figure-12-module_mse-analysis文件夹中包含了对每个module进行功能注释msea的结果figure-13">3) module_information文件夹中包含了dysregulated module的分析结果。其中module.result.csv是module的信息。module.overview.pdf是module结果的总览(Figure 10)。module.heatmap.pdf是对module进行定量分析之后的热图(Figure 11)。boxplot文件夹中包含了module在两组间的定量结果(Figure 12)。Module_MSE analysis文件夹中包含了对每个module进行功能注释(MSEA)的结果(Figure 13)。</span></h4>
+<p><img src="module.overview.png" alt="Figure 10: Module overview"></p>
+<p><img src="module.heatmap.png" alt="Figure 11: Module heatmap"></p>
+<p><img src="module1.boxplot.png" alt="Figure 12: Module boxplot"></p>
+<p><img src="module1.MSEA.png" alt="Figure 13: Module MSEA result"></p>
+<h4><span id="3-pathway_information文件夹中包含了pathway的分析结果figure-14">3) pathway_information文件夹中包含了pathway的分析结果(Figure 14)。</span></h4>
+<p><img src="pathway.information.png" alt="Figure 14: Pathway information"></p>
+<h4><span id="其中">其中：</span></h4>
+<ul>
+<li>
+<h4><span id="boxplot该文件夹中含有每个pathway的定量信息">boxplot：该文件夹中含有每个pathway的定量信息;</span></h4>
+</li>
+<li>
+<h4><span id="dysregulatednetworkoverview该图表示dysregulated-network的pathway分析结果">dysregulated.network.overview：该图表示dysregulated network的pathway分析结果;</span></h4>
+</li>
+<li>
+<h4><span id="dysregulatednetwrokmseacsvdysregulated-network的msea分析结果">dysregulated.netwrok.MSEA.csv：dysregulated network的MSEA分析结果;</span></h4>
+</li>
+<li>
+<h4><span id="dysregulatednetwrokmseapdfdysregulated-network的msea分析结果">dysregulated.netwrok.MSEA.pdf：dysregulated network的MSEA分析结果;</span></h4>
+</li>
+<li>
+<h4><span id="dysregulatednetworksforcytoscapetxt用于cytoscape作图的数据">dysregulated.networks.for.cytoscape.txt：用于cytoscape作图的数据；</span></h4>
+</li>
+<li>
+<h4><span id="dysregulatednetworksattributetxt用于cytoscape作图的节点属性数据">dysregulated.networks.attribute.txt：用于cytoscape作图的节点属性数据；</span></h4>
+</li>
+<li>
+<h4><span id="pathwayheatmappdfdysregulated-network的pathway定量的heatmap">pathway.heatmap.pdf：dysregulated network的pathway定量的heatmap。</span></h4>
+</li>
+</ul>
+<h3><span id="5-analysis_report_pos"><strong>(5) Analysis_report_POS</strong></span></h3>
+<h4><span id="对数据处理分析结果的总结-输出的结果存放在analysis_report文件夹内-包括一份html格式的分析报告">对数据处理分析结果的总结。输出的结果存放在Analysis_report文件夹内。包括一份html格式的。</span></h4>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2017/03/18/2016-11-25-metcleaning/" data-toggle="tooltip" data-placement="top" title="MetCleaning">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Ⅰ数据准备</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">MetDNA需要准备的数据包括一级数据peak table(csv格式)，二级数据(mgf格式)(csv格式)。点击下载和。</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">Table 1: demo数据信息</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">1. 一级数据</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">一级数据可以是使用XCMS，MZmine，MS-DIAL或者其他软件处理之后的数据。第一列为代谢物峰的名字，“name”，第二列为&quot;mz&quot;，第三列为保留时间(RT)，且单位必须为秒，其他为样品的峰强度。</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">2. 二级数据</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">二级质谱原始数据可以是使用QC样品采集的DDA或者targeted MS/MS数据。对于DDA数据来说，也可以是分段采集的二级数据。质谱原始二级数据需要使用ProteoWizard软件转为mgf格式，转换时参数设置参考下图。二级数据最多不能超过十个。</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">3. 样品信息</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">样品信息是样品的分组信息。第一列是样品名，“”，第二列是样品的分组信息，“group”。</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">Ⅱ 数据整理</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">5.1.</span> <span class="toc-nav-text">如果是正离子数据，请建立一个新的文件夹，命名为&quot;POS&quot;，如果是负离子数据，请建立一个新的文件夹命名为&quot;NEG&quot;，然后将一级数据，二级数据和样品信息放置于此文件夹下。并将该文件夹设置为工作路径。现在MetDNA部署在小服务器上，因此可以将数据放在小服务器中(labdata)。例如&quot;V:/workreport/申小涛/demo/fly/POS&quot;。</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">5.2.</span> <span class="toc-nav-text">设置工作路径。</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">Ⅲ 数据处理</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">1. 只对正离子或者负离子处理</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.1.</span> <span class="toc-nav-text">所有的步骤可以使用一个函数MetDNA全部完成。</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.2.</span> <span class="toc-nav-text">运行函数MetDNA。</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.3.</span> <span class="toc-nav-text">ms1.file：一级数据的名字。</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.4.</span> <span class="toc-nav-text">polarity：数据采集极性，“positive&quot;或者&quot;negative”。</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.5.</span> <span class="toc-nav-text">column：使用的柱子类型，“hilic&quot;或者&quot;rp”。</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.6.</span> <span class="toc-nav-text">ce：二级采集的碰撞能量，支持&quot;10&quot;，“15”，“20”，“25”，“30”，“35”，“35,15” (35±15)，“40”， “45”，“50”，“55”，“60”，“65”，“70”。</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.7.</span> <span class="toc-nav-text">prefer.adduct：使用那些加合物形式的注释用于RT预测模型的建立，默认使用所有的注释，推荐正离子模式下使用&quot;M+H&quot;，负离子模式下使用&quot;M-H&quot;。</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.8.</span> <span class="toc-nav-text">：进行保留时间预测模型建立时，是否使用默认的分子描述符，如果设置为FALSE，则会根据你的数据自动选择分子描述符。</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.9.</span> <span class="toc-nav-text">threads：使用线程数，默认为3，可以根据电脑本身配置进行修改。</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.10.</span> <span class="toc-nav-text">group：要对哪些分组的样品进行分析，注意，计算fold change时，使用后面的样品除以前面的样品。</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.11.</span> <span class="toc-nav-text">uni.test：单变量分析的方法，“t”，Student t test；“wilcox”，Wilcox test。</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.12.</span> <span class="toc-nav-text">correct：是否需要对p值进行FDR校正。</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.13.</span> <span class="toc-nav-text">p.cutoff：选择dysregulated peak时的p值cutoff。</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.14.</span> <span class="toc-nav-text">species：所研究样品的物种来源，“dme”，果蝇；“hsa”，人类；“mmu”，小鼠；“rat”，大鼠，“bta”，牛；“gga”，Gallus gallus (鸡)；“dre”，Danio rerio (斑马鱼)；“cel”，Caenorharomyces elegans (线虫)；“sce”，Saccharomyces cerevisaiae (酵母)； “ath”，Arabidopsis thaliana (拟南芥)；“smm”，Schistosoma mansoni；“pfa”，Plasmodum falciparum 3D7；“tbr”，Trypanosoma brucei；“eco”， Escherichia coli K-12 MG1655(大肠杆菌)；“ppu”，Pseudomonas putida KT2440；“syf”，Synechococcus elongatus。</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">8.</span> <span class="toc-nav-text">2. 对正负数据合并分析</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">8.1.</span> <span class="toc-nav-text">正负离子分别处理之后，可以使用函数metModule2函数合并正负离子模式的鉴定结果，进行dysregulated network analysis。</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">8.2.</span> <span class="toc-nav-text">运行函数MetModule2</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">8.3.</span> <span class="toc-nav-text">group：要对哪些分组的样品进行分析，注意，计算fold change时，使用后面的样品除以前面的样品。</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">8.4.</span> <span class="toc-nav-text">uni.test：单变量分析的方法，“t”，Student t test；“wilcox”，Wilcox test。</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">8.5.</span> <span class="toc-nav-text">column：使用的柱子类型，“hilic&quot;或者&quot;rp”。</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">8.6.</span> <span class="toc-nav-text">correct：是否需要对p值进行FDR校正。</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">8.7.</span> <span class="toc-nav-text">p.cutoff：选择dysregulated peak时的p值cutoff。</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">8.8.</span> <span class="toc-nav-text">threads：使用线程数，默认为3，可以根据电脑本身配置进行修改。</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">8.9.</span> <span class="toc-nav-text">species：所研究样品的物种来源，“dme”，果蝇；“hsa”，人类；“mmu”，小鼠；“rat”，大鼠，“bta”，牛；“gga”，Gallus gallus (鸡)；“dre”，Danio rerio (斑马鱼)；“cel”，Caenorharomyces elegans (线虫)；“sce”，Saccharomyces cerevisaiae (酵母)； “ath”，Arabidopsis thaliana (拟南芥)；“smm”，Schistosoma mansoni；“pfa”，Plasmodum falciparum 3D7；“tbr”，Trypanosoma brucei；“eco”， Escherichia coli K-12 MG1655(大肠杆菌)；“ppu”，Pseudomonas putida KT2440；“syf”，Synechococcus elongatus。</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">8.10.</span> <span class="toc-nav-text">运行函数analysisReport得到分析报告。</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">9.</span> <span class="toc-nav-text">Ⅳ 运行结果</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">10.</span> <span class="toc-nav-text">1. 正离子或者负离子的运行结果</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">10.1.</span> <span class="toc-nav-text">MetDNA函数运行结束之后，所有的运行结果都存放在设置的路径中，包含二级谱图匹配结果，MRN注释结果，dysregulated network分析结果以及分析报告。如图5所示。</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.</span> <span class="toc-nav-text">(1) MetDNA.parameters.csv</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.1.</span> <span class="toc-nav-text">记录此次运行所使用的参数。</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">12.</span> <span class="toc-nav-text">(2) ms2_match_result_POS</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">12.1.</span> <span class="toc-nav-text">二级谱图匹配结果。包括一个csv文件，ms2.match.annotation.result.csv和一个文件夹，MS2_match_spectra。ms2.macth.annotation.result.csv是二级谱图匹配之后的结果，与MetAnalyzer处理之后的结果相同；MS2_match_spectra文件夹中包含了所有二级匹配图(Figure 6)。</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">13.</span> <span class="toc-nav-text">(3) MRN_annotation_result_POS</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">13.1.</span> <span class="toc-nav-text">基于metabolic reacion network注释结果。包括两个csv文件，metABM.parameters.csv和MRN.annotation.result.csv。MRN.annotation.result.csv是使用MRN注释结果(Figure 8)。</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">13.2.</span> <span class="toc-nav-text">其中：</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">13.3.</span> <span class="toc-nav-text">：该peak的该注释来自于哪个metabolite(ID);</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">13.4.</span> <span class="toc-nav-text">annotation.from.peak：该peak的该注释来自于哪个peak;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">13.5.</span> <span class="toc-nav-text">ID：注释代谢物结果的KEGG ID;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">13.6.</span> <span class="toc-nav-text">：注释结果的名字；</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">13.7.</span> <span class="toc-nav-text">isotope：同位素信息；</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">13.8.</span> <span class="toc-nav-text">adduct：加合物信息；</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">13.9.</span> <span class="toc-nav-text">Formula：化学结构式；</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">13.10.</span> <span class="toc-nav-text">score：注释打分；</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">13.11.</span> <span class="toc-nav-text">peak.group：peak group；</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">13.12.</span> <span class="toc-nav-text">confidence：对注释的peak group打分。</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">14.</span> <span class="toc-nav-text">(4) Dysregulated_network_analsysi_result_POS</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">14.1.</span> <span class="toc-nav-text">Dysregulated network分析的结果。其中包括一个pdf文件，volcano.plot.pdf(Figure: 9)，两个csv文件，metModule.parameters.csv和DNA.annotation.result.csv以及两个文件夹，module_information(Figure 10)和pathway_inforamtion (Figure 11)。</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">14.2.</span> <span class="toc-nav-text">1) volcano.plot是选取差异代谢物峰的火山图。</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">14.3.</span> <span class="toc-nav-text">2) DNA.annotation.result.csv是通过dysregulated network对注释结果进行筛选以及KEGG database注释之后的注释结果。</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">14.4.</span> <span class="toc-nav-text">3) module_information文件夹中包含了dysregulated module的分析结果。其中module.result.csv是module的信息。module.overview.pdf是module结果的总览(Figure 10)。module.heatmap.pdf是对module进行定量分析之后的热图(Figure 11)。boxplot文件夹中包含了module在两组间的定量结果(Figure 12)。Module_MSE analysis文件夹中包含了对每个module进行功能注释(MSEA)的结果(Figure 13)。</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">14.5.</span> <span class="toc-nav-text">3) pathway_information文件夹中包含了pathway的分析结果(Figure 14)。</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">14.6.</span> <span class="toc-nav-text">其中：</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">14.7.</span> <span class="toc-nav-text">boxplot：该文件夹中含有每个pathway的定量信息;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">14.8.</span> <span class="toc-nav-text">dysregulated.network.overview：该图表示dysregulated network的pathway分析结果;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">14.9.</span> <span class="toc-nav-text">dysregulated.netwrok.MSEA.csv：dysregulated network的MSEA分析结果;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">14.10.</span> <span class="toc-nav-text">dysregulated.netwrok.MSEA.pdf：dysregulated network的MSEA分析结果;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">14.11.</span> <span class="toc-nav-text">dysregulated.networks.for.cytoscape.txt：用于cytoscape作图的数据；</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">14.12.</span> <span class="toc-nav-text">dysregulated.networks.attribute.txt：用于cytoscape作图的节点属性数据；</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">14.13.</span> <span class="toc-nav-text">pathway.heatmap.pdf：dysregulated network的pathway定量的heatmap。</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">15.</span> <span class="toc-nav-text">(5) Analysis_report_POS</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">15.1.</span> <span class="toc-nav-text">对数据处理分析结果的总结。输出的结果存放在Analysis_report文件夹内。包括一份html格式的。</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#代谢组学" title="代谢组学">代谢组学</a>
+                        
+                          <a class="tag" href="/tags/#R语言" title="R语言">R语言</a>
+                        
+                          <a class="tag" href="/tags/#代谢物鉴定" title="代谢物鉴定">代谢物鉴定</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://shenxt.me/" target="_blank">Shen blog</a></li>
+                    
+                        <li><a href="http://www.zhulab.cn/" target="_blank">Zhu lab</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "your-disqus-ID";
+    var disqus_identifier = "http://yoursite-url/2017/03/18/2017-09-09-metdna-blog/";
+    var disqus_url = "http://yoursite-url/2017/03/18/2017-09-09-metdna-blog/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/omicspie">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; omicsPie 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://yoursite-url/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://yoursite-url/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
