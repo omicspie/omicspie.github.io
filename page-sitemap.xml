@@ -7,6 +7,13 @@
     </url>
     
     <url>
+        <loc>https://omicspie.com/tags/</loc>
+        <lastmod>2018-05-28T14:44:16.989Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
         <loc>https://omicspie.com/contact/</loc>
         <lastmod>2018-05-28T14:19:24.257Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -30,13 +37,6 @@
     <url>
         <loc>https://omicspie.com/archive/</loc>
         <lastmod>2018-05-28T14:07:10.194Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
-        <loc>https://omicspie.com/tags/</loc>
-        <lastmod>2018-05-28T14:06:34.144Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
