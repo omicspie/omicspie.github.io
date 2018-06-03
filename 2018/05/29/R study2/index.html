@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          R语言入门 - omicsPie | 组学派
+        
+    </title>
+
+    <link rel="canonical" href="https://omicspie.com/2018/05/29/R study2/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/beantech.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('Demo.png')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#R语言" title="R语言">R语言</a>
+                            
+                              <a class="tag" href="/tags/#组学基础" title="组学基础">组学基础</a>
+                            
+                        </div>
+                        <h1>R语言入门</h1>
+                        <h2 class="subheading">R语言入门</h2>
+                        <span class="meta">
+                            Posted by omicsPie on
+                            2018-05-29
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">omicsPie</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/contact/">联系我们</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">关于组学派</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">所有文章</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/founder/">管理团队</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">标签</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>这篇文章开始介绍R的基本知识，来让初步学习R语言的同学们能够快速入门。已经入门的同学请略过本文，<strong>否则你将浪费人生中的十分钟。。。</strong></p>
+<h3><span id="1-数据结构">1. 数据结构</span></h3>
+<h4><span id="向量-vectorr语言中的战斗机">向量 （vector）：R语言中的战斗机</span></h4>
+<p>向量类型是R语言的核心，很多运算都涉及到向量。我们先来一个最简单的向量。</p>
+<p>直接在控制台（Rstudio左下角的那个地方）中输入：</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">x</span> &lt;- <span class="number">3</span></span><br><span class="line"><span class="keyword">x</span></span><br></pre></td></tr></table></figure>
+<p>x就是一个向量，一维的，3就是元素，只是只有一个，光杆司令。</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">y &lt;- c(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line">y</span><br><span class="line">length(y)</span><br><span class="line">y[<span class="number">1</span>]</span><br><span class="line">y[<span class="number">3</span>]</span><br><span class="line">x[<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+<p>“&lt;-”是R语言中赋予的符号，在这个公式中，意味着我们把3这个值赋给x这个变量名，这样x就是3，但是3不一定是x。</p>
+<p>我们再创建一个长度不是1的向量，</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">y &lt;- c(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line">y</span><br><span class="line">length(y)</span><br><span class="line">y[<span class="number">1</span>]</span><br><span class="line">y[<span class="number">3</span>]</span><br><span class="line">x[<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+<p>y就是一个长度为3的向量。length函数是用来查看向量长度的函数。对于y向量来说，他的元素就是1,2,3。向量中的元素是有顺序的，第一个从1开始计算，比如我想要查看向量y的第一个元素，那么就使用y[1]。y[1]代表的就是向量y的第一个元素，那么同样的y的第三个元素就是y[3]。</p>
+<h4><span id="矩阵matrix">矩阵（matrix）：</span></h4>
+<p>R中的矩阵概念跟数学中完全一样。矩阵可以理解为二维的向量，也就是包括行数和列数。下面我们举个栗子：</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">m &lt;- rbind(<span class="name">c</span>(<span class="number">1</span>,<span class="number">2</span>), c(<span class="number">2</span>,<span class="number">3</span>))</span><br><span class="line">m</span><br></pre></td></tr></table></figure>
+<p>rbind是一个函数，我们简单介绍一下。rbind直接从字面上理解是row combine，也就是行组合。什么意思呢？就是把几个向量按照行从上到下组合起来。用图可以很好地理解：（灵魂画师上线。。。）</p>
+<p><img src="https://note.youdao.com/yws/public/resource/65076dda883d93a792dc64163dec905a/xmlnote/ECBE039B1F874792A3A8A6FCAE9D2700/17899" alt=""></p>
+<p>rbind函数就是把向量1和2然后按照行组合起来，成为一个新的矩阵。从这上面可以看到必须满足两个条件，向量1和2必须长度一致。同样还有一个函数，cbind，大家应该猜到了，就是column combine，也就是把几个向量按照列从左到右组合。</p>
+<p>比如</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">m2 &lt;- cbind(c(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>), c(<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>))</span><br><span class="line">dim(m2)</span><br></pre></td></tr></table></figure>
+<p><strong>dim是查看矩阵的行数和列数。那么，怎么查看矩阵的某个元素呢？和向量一样，需要使用[]来看，但是要看单个元素，得使用行数和列数来进行确定，比如:</strong></p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">m2[<span class="number">1</span>,<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+<p>就是指m2的第1行和第2列的元素是什么东东。</p>
+<p>那么，能够直接从矩阵中提取子向量和子矩阵呢？当然阔以：</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">m2[<span class="number">2</span>,]</span><br><span class="line">m2[,<span class="number">1</span>]</span><br><span class="line">m2[c(<span class="number">1</span>,<span class="number">2</span>),]</span><br><span class="line">m2[<span class="number">2</span>,]#就是指m2的第<span class="number">2</span>行的所有元素</span><br><span class="line">m2[,<span class="number">1</span>]#就是指m2的第<span class="number">1</span>列的所有元素</span><br><span class="line">m2[c(<span class="number">1</span>,<span class="number">2</span>),]#就是指把m2的第<span class="number">1</span>和第<span class="number">2</span>行的矩阵</span><br></pre></td></tr></table></figure>
+<p>注意：#也就是井号，是注释的意思，也就是#后面的代码是不会运行的，所以如果你想要对代码进行注释说明，那么就可以像上面一样，加一个#号，然后在后面写下注释的内容。</p>
+<h4><span id="数据框dataframe">数据框（data.frame）</span></h4>
+<p>数据框和矩阵是非常类似的，但是完全不一样的，就是矩阵中的元素类型必须一致，而数据框中的元素类型则可以不同。</p>
+<p>比如我们有3个同学的语文，数学成绩。第一列是同学的名字（字符型，character），第二列是语文成绩（数字型，numeric），第三列是数学成绩（数字型，numeric）。这时候就得使用数据框了。</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">d &lt;- data.frame(name = c(<span class="string">"Shen"</span>, <span class="string">"Li"</span>, <span class="string">"Tu"</span>),</span><br><span class="line">Yuwen = c(<span class="number">90</span>, <span class="number">95</span>, <span class="number">100</span>),</span><br><span class="line">Shuxue = c(<span class="number">85</span>,<span class="number">80</span>,<span class="number">90</span>))</span><br><span class="line">d</span><br></pre></td></tr></table></figure>
+<p>使用函数data.frame建立数据框。name，Yuwen，Shuxue是建立好之后的数据框d的列名。</p>
+<p>前面介绍了R语言中的最为常见的几种数据结构，差不多可以满足我们后面的需求了。后面再遇到新的东西，我们再介绍。</p>
+<h3><span id="2-函数">2. 函数</span></h3>
+<p>和其他语言一样，函数是R语言中的战斗机。和数学概念一样，y = f(x)，也就是输入变量x，然后经过函数f的处理，得到结果y。</p>
+<p>函数也是一个对象，比如：</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">&lt;</span></span>- function(a, b) &#123;</span><br><span class="line">a + b</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>fun就是一个最为简单的函数。他要做的就是把a和b加起来，输出a和b之和。在这里面，a和b是形参（形式参数），不是具体的参数。只是用来把位置占起来。那么我们使用fun来做一个简单的计算：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">fun</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>)</span></span></span><br></pre></td></tr></table></figure>
+<p>这时候1和2就是实参（实际参数），也就是把1和2带进去，计算1和2的和。很多函数（也就是功能）都是别人已经写好的，比如求和sum，求根sqrt等等。 函数写好之后，很多都在不同的包（package）中，下面就介绍一下R语言中的包。</p>
+<h3><span id="3-包package">3. 包（package）</span></h3>
+<p>R包，类似C、Python中库的概念，指包含特定领域的函数、数据、文档等的集合。通过调用包，可以直接使用包中现成的数据、函数等，使开发方便快捷高效。</p>
+<ul>
+<li>R的强大在于包含了各种各样的包，使用包非常有利于便捷开发。</li>
+<li>一些功能在现有的包中并不存在，需要自己实现，实现后通过打包方便代码的复用。</li>
+<li>每个包涵括一个领域相关的函数数据文档等，通过包可以有效地组织代码结构，有利于开发。</li>
+</ul>
+<p>在R中，所有的函数都是封装好，放在包中的，包是R语言互相交流的最好方法。下面简单介绍一下包的安装，使用，等我们后面会介绍怎么创建，分享自己的R包。</p>
+<h4><span id="如何找到自己的需要的r包">如何找到自己的需要的R包</span></h4>
+<p>大家要相信很多方法都已经是存在的了，所以你能想到的功能，很多已经被别人做过了，已经有了现成的工具可以使用，也就是R包。因此，如果想实现一个功能，首先要想到的就是是不是已经存在了这样的工具，而不是自己去写。那么如何找到自己所需要的R包呢，这时候就得靠搜索引擎了（谷歌一下，你就知道）。当然，在我大天朝，谷歌早已经404了，如果你能够使用，或者能够<s>翻墙</s>接触到这个万恶的网站，那是最好的，如果不行，那就用必应（必应内心OS：终于想我到了啊。。。），最次，使用百度（百度：嗯？）。</p>
+<h4><span id="如何安装r包">如何安装R包</span></h4>
+<p>R包一般会公开在三个地方：</p>
+<ul>
+<li>CRAN：The Comprehensive R Archive Network，这是R core team的R包官方存放地方。安装放在这些的R的网址是<a href="https://mirrors.tongji.edu.cn/CRAN/" target="_blank" rel="noopener">https://mirrors.tongji.edu.cn/CRAN/</a>，怎么安装这些包呢？使用下面代码即可：</li>
+</ul>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">install</span>.packages(<span class="string">"package.name"</span>)<span class="comment">#将package.name替换为自己的要安装的包的名字即可。</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>Bioconductor：这个是大部分的生信相关的包存放的地方，网址<a href="https://www.bioconductor.org/" target="_blank" rel="noopener">https://www.bioconductor.org/</a>，安装使用代码如下：</li>
+</ul>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">## try http:<span class="comment">// if https:// URLs are not supported</span></span><br><span class="line">source(<span class="string">"https://bioconductor.org/biocLite.R"</span>)</span><br><span class="line">biocLite(<span class="string">"package.name"</span>)#将package.name替换为自己的要安装的包的名字即可。</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Github：CRAN和bioconductor都需要经过一定的审核，才可以发布，因此另外一个最为常用的代码托管网站，<a href="https://github.com/" target="_blank" rel="noopener">github</a>，就更为常用友好了，只要把自己写的代码和包放在github上，就可以安装R包了。安装github上的R包，需要使用到R语言大神<a href="http://hadley.nz/" target="_blank" rel="noopener">Hadley Wickham</a>写的包，devtools了。因此，首选需要安装这个包，代码如下：</li>
+</ul>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">install.packages(<span class="string">"devtools"</span>)</span><br><span class="line"><span class="function"><span class="title">library</span><span class="params">(devtools)</span></span></span><br><span class="line"><span class="function"><span class="title">install_github</span><span class="params">(<span class="string">"user.name/package.name"</span>)</span></span>#其中user.name是github作者的用户名。</span><br></pre></td></tr></table></figure>
+<h4><span id="如何获得r包及函数的帮助文档">如何获得R包及函数的帮助文档</span></h4>
+<p>安装包之后，如要观察这个包里面所有的函数，以及这个R的说明，比如对于我们刚才安装的sxtTools这个包。我们就可以使用下面代码看这个包里面都含有哪些函数：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">help</span><span class="params">(package = <span class="string">"sxtTools"</span>)</span></span></span><br></pre></td></tr></table></figure>
+<p><img src="https://note.youdao.com/yws/public/resource/65076dda883d93a792dc64163dec905a/xmlnote/222CB5AF6D0044E4B1C5B4C78C2FE30B/18919" alt=""></p>
+<p>如果想看某个具体的函数的信息，可以使用下面的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?installBioc</span><br></pre></td></tr></table></figure>
+<p><img src="https://note.youdao.com/yws/public/resource/65076dda883d93a792dc64163dec905a/xmlnote/6C773E8B327C4138B564EC9294D3B4C3/18924" alt=""></p>
+<p>每个函数都有详细的说明，可以通过看这些详细的官方文档来学习怎么使用，如果想更便捷，那就直接上<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">#### 下期预告</span><br><span class="line"></span><br><span class="line"> 下期我们开始学习怎么读取，输出数据，敬请期待</span><br></pre></td></tr></table></figure></p>
+<h4><span id="ps所有的代码都放在了我的github上大家猛戳阅读原文获得代码">PS：所有的代码，都放在了我的github上，大家猛戳<strong>阅读原文</strong>获得代码</span></h4>
+
+
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2018/05/30/metabolomics-is-three-bros/" data-toggle="tooltip" data-placement="top" title="代谢组学原来是三兄弟啊">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/05/28/R study1/" data-toggle="tooltip" data-placement="top" title="R语言大利器之Rstudio安装">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">1. 数据结构</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">向量 （vector）：R语言中的战斗机</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">矩阵（matrix）：</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">数据框（data.frame）</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">2. 函数</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">3. 包（package）</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">如何找到自己的需要的R包</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">如何安装R包</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">如何获得R包及函数的帮助文档</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.4.</span> <span class="toc-nav-text">PS：所有的代码，都放在了我的github上，大家猛戳阅读原文获得代码</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+
+
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://shenxt.me/" target="_blank">Shen blog</a></li>
+                    
+                        <li><a href="http://www.zhulab.cn/" target="_blank">Zhu lab</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "shenxt";
+    var disqus_identifier = "https://omicspie.com/2018/05/29/R study2/";
+    var disqus_url = "https://omicspie.com/2018/05/29/R study2/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/shen-zu-tao-73">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/omicspie">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/shenxt">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+
+
+                
+                    <li>
+                        <a target="_blank"  href="http://ow5z7hup5.bkt.clouddn.com/qrcode_for_gh_5f4396a2e4c3_430.jpg">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-qq fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="http://ow5z7hup5.bkt.clouddn.com/wechatid.jpg">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weixin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; omicsPie 2018 <br>
+                    联系电话: +86 15821606469 <br>
+                    邮箱: omicspie@163.com <br>
+                    地址: 上海市浦东新区张江高科技园区秋月路26号6号楼209室
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://omicspie.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '4cc1f2d8f3067386cc5cdb626a202900';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://omicspie.com/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

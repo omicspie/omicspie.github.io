@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          omicsPie | 组学派
+          代谢组学原来是三兄弟啊 - omicsPie | 组学派
         
     </title>
 
-    <link rel="canonical" href="https://omicspie.com/404.html">
+    <link rel="canonical" href="https://omicspie.com/2018/05/30/metabolomics-is-three-bros/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -69,8 +69,8 @@
 <style type="text/css">
     header.intro-header{
         
-            background-image: url('/img/404-bg.jpg')
-            /*page*/
+            background-image: url('Demo.png')
+            /*post*/
         
     }
     
@@ -83,10 +83,20 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 
-                    <div class="site-heading">
-                        <h1>omicsPie</h1>
-                        <!--<hr class="small">-->
-                        <span class="subheading">你来到了没有知识的荒原 :(</span>
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#代谢组学" title="代谢组学">代谢组学</a>
+                            
+                              <a class="tag" href="/tags/#组学基础" title="组学基础">组学基础</a>
+                            
+                        </div>
+                        <h1>代谢组学原来是三兄弟啊</h1>
+                        <h2 class="subheading">代谢组学原来是三兄弟啊</h2>
+                        <span class="meta">
+                            Posted by omicsPie on
+                            2018-05-30
+                        </span>
                     </div>
                 
 
@@ -203,25 +213,164 @@
 
 
     <!-- Main Content -->
-    
-<!-- Page Header -->
-<header class="intro-header" style="background-image: url('/img/404-bg.jpg')">
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading">
-                    <h1>404</h1>
-                    <!--<hr class="small">-->
-                    <span class="subheading">你来到了没有知识的荒原 :(</span>
-                </div>
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>当今时代，组学概念层出不穷，从开始的基因组学、转录组学、蛋白质组学和代谢组学，到现代细分出来的暴露组学、食品组学、中药组学等。今天我们就来聊聊小编所理解的代谢组学。</p>
+<blockquote>
+<p>代谢组学是2000年代末兴起的一门学科，其主要有三个学科交叉组学，包括化学、生物信息学和生物学。</p>
+</blockquote>
+<h3><span id="所谓化学">所谓化学</span></h3>
+<p>所谓化学，就是我们如何通过仪器分析获得样品中代谢物的相对或绝对含量。（1）第一步就是得先知道如何萃取样品中的代谢物，需要检测的代谢物属于脂类还是小分子极性化合物，是挥发物还是聚合物，选用不同的萃取溶剂。（2）第二步如何通过仪器分析检测到代谢物的丰度，色谱选择LC还是GC，质谱采集选用TOF，QQQ还是Orbi，QTrap（当然还有NMR，IR，UV-vis采集数据）。（3）第三步如何定量测到的化合物如何进行定性和定量，是通过内标法还是外标法，是对数据库还是标准品同位素标记。除此之外，还包括解卷积的算法，数据库相似度算法，峰对齐算法等。</p>
+<p>我们使用R语言来进行数据处理，那么就需要将本地的数据读取到R中，当在R中进行一定的处理之后，我们也需要将处理之后的数据输出。因此，本文就给大家介绍一下，R语言中最基本的数据读取和输出的方法。</p>
+<h3><span id="所谓生物信息学">所谓生物信息学</span></h3>
+<p>所谓生物信息学，就是从仪器采集得到数据经过初步分析得到的数据矩阵之后，我们该如何从中能挖掘到有价值的数据信息并高效直观的展示信息。（1）多元统计分析（PCA、PLS-DA等）和单元统计分析（t-test，ANOVA），根据算法的进步逐步出现更高效算法来弥补一般多元统计分析（过拟合）和单元统计分析（p值矫正）的缺陷，甚至还包括一些机器学习的方法也应用到代谢组学中来（KNN，random forest），此外，还有一些用于归一化（mTIC，batch SOM，SVM）、缩放（UV，pareto）的算法也是统计分析中的关键步骤。（2）此外就是数据的可视化，高效的展示数据更直观的理解实验结果，如果常见的Boxwhiskers, Volcano plot, Heatmap, Venn, Pearson networks, Clusters，pathway networks等。（3）随着代谢组学数据分析方法的革新，引入了一门新的学科，就是基于计算机语言的质谱数据分析软件的开发，包括AMDIS，mzMine, XCMS, MetAlign等等，诸多高效的方法开发为代谢组学的研究开启的新的征程。</p>
+<h3><span id="所谓生物学">所谓生物学</span></h3>
+<p>所谓生物学，就是得到显著性统计学变化的代谢物，如何分析其生物学价值。在分析生物学价值之前，先得知道我们的代谢物是什么来源。不同的来源对应的生物学价值也不同，是植物来源？微生物来源？还是动物来源；即使动物来源，也分是人源？鼠源？还是果蝇；即使知道是人源，还得分是血液中的？是尿液中的？还是脏器中的。不同来源的代谢物其生物学价值不同。我们得知道统计学的显著性不等于生物学的显著性。</p>
+<p>好了，小编就今天介绍到这里，代谢组学是三兄弟。</p>
+
+
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2018/05/30/R study3/" data-toggle="tooltip" data-placement="top" title="数据读取和输出">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/05/29/R study2/" data-toggle="tooltip" data-placement="top" title="R语言入门">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">所谓化学</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">所谓生物信息学</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">所谓生物学</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+
+
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://shenxt.me/" target="_blank">Shen blog</a></li>
+                    
+                        <li><a href="http://www.zhulab.cn/" target="_blank">Zhu lab</a></li>
+                    
+                </ul>
+                
             </div>
         </div>
     </div>
-</header>
+</article>
 
-<script>
-    document.body.classList.add('page-fullscreen');
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "shenxt";
+    var disqus_identifier = "https://omicspie.com/2018/05/30/metabolomics-is-three-bros/";
+    var disqus_url = "https://omicspie.com/2018/05/30/metabolomics-is-three-bros/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
 </script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
 
 
     <!-- Footer -->

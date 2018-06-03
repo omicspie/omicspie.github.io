@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          R语言大利器之Rstudio安装 - omicsPie | 组学派
+          数据读取和输出 - omicsPie | 组学派
         
     </title>
 
-    <link rel="canonical" href="https://omicspie.com/2018/05/28/R study1/">
+    <link rel="canonical" href="https://omicspie.com/2018/05/30/R study3/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -91,11 +91,11 @@
                               <a class="tag" href="/tags/#组学基础" title="组学基础">组学基础</a>
                             
                         </div>
-                        <h1>R语言大利器之Rstudio安装</h1>
-                        <h2 class="subheading">R语言大利器之Rstudio安装</h2>
+                        <h1>数据读取和输出</h1>
+                        <h2 class="subheading">数据读取和输出</h2>
                         <span class="meta">
                             Posted by omicsPie on
-                            2018-05-28
+                            2018-05-30
                         </span>
                     </div>
                 
@@ -226,24 +226,50 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>俗话说，工欲善其事，必先利其器，R语言就有这么一件利器。很多第一次接触R语言的人，无不被R语言自带的IDE（集成开发环境）逼疯，甚至望而却步，对R语言好感尽失。虽然也有其他的IDE出现，但是不得不说，Rstudio的出现，大大拯救了那些在R语言苦海学习中的人。Rstudio是美国Rstudio公司开发的，界面简单，炫酷，实用，是R语言学习使用的利器。下面简单介绍一下怎么安装Rsudio，后面会再陆续介绍一些Rstudio的其他知识。</p>
-<h3><span id="1-首先需要安装r语言">1. 首先，需要安装R语言.</span></h3>
-<p>已安装的可以直接跳过该步骤。直接在<a href="https://cran.r-project.org/mirrors.html" target="_blank" rel="noopener">R官网上下载最新版本</a>，选择中国的镜像，比如清华大学(<a href="https://mirrors.tuna.tsinghua.edu.cn/CRAN/" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/CRAN/</a>),然后选择适合自己系统的包，下载安装即可。</p>
-<p><img src="R%E4%B8%8B%E8%BD%BD.png" alt=""></p>
-<h3><span id="2-然后安装rstudio">2. 然后安装Rstudio。</span></h3>
-<p>到<a href="https://www.rstudio.com/products/rstudio/download/#download" target="_blank" rel="noopener">Rstudio官网</a>，选择适合自己系统的Rstudio包，下载，然后安装即可。</p>
-<p><img src="Rstudio%E4%B8%8B%E8%BD%BD.png" alt=""></p>
-<h3><span id="3-安装完成之后即可打开rsudio-rstudio界面如下图所示">3. 安装完成之后，即可打开Rsudio。Rstudio界面如下图所示。</span></h3>
-<p><img src="Rstudio.png" alt=""></p>
-<p>Rstudio一共有四个panel，其中左上角为source，是打开自己脚本以及文件的窗口。左下角为Console，也就是控制台，是直接输入代码的地方，输入代码之后，直接回车，就会返回运算结果。右上角为显示你的环境变量，输入历史，以及其他功能，如编译包，github代码控制等窗口。有下家为显示文件以及图片的窗口。</p>
-<h3><span id="4-rstudio的简单使用">4. Rstudio的简单使用。</span></h3>
-<p>创建R脚本，直接点击左上角的绿色加号，选择R script，即可创建一个R语言脚本。</p>
-<p><img src="%E5%88%9B%E5%BB%BAscript.png" alt=""></p>
-<p>创建好的脚本是没有名字的，默认为Untitled1。</p>
-<p><img src="script.png" alt=""></p>
-<p>然后就可以在这里面写入脚本，代码。<br>
-到现在为止，就学会了Rstudio的安装和简单使用。后面，我们会有一篇文章再来详细介绍Rstudio的使用。<br>
-如果你想学习R语言的使用以及与任何组学相关的只是，请关注我们。如果有任何问题，请给我们留言或者发送邮件，omicschina@163.com，也可以加入我们的QQ群，182971123和我们交流。</p>
+                <h3><span id="数据的读取和输出">数据的读取和输出</span></h3>
+<p>我们使用R语言来进行数据处理，那么就需要将本地的数据读取到R中，当在R中进行一定的处理之后，我们也需要将处理之后的数据输出。因此，本文就给大家介绍一下，R语言中最基本的数据读取和输出的方法。</p>
+<h4><span id="如何设置工作路径">如何设置工作路径</span></h4>
+<p>工作路径（work directory）是指当前R的文件夹地址在哪？如果想知道自己现在的工作路径是什么，可以使用下列代码：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">getwd</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<p>就会显示出来当前的工作路径在哪里，意思就是你直接输出的各种那文件，就会直接输出到这个文件夹里面。</p>
+<p>那么比如我们现在有文件在另外一个文件夹里，在F盘的test里面，我想从这个里面读取我的数据，那么我该怎么做呢？那就需要将路径设置在该文件夹下，使用下列代码：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">setwd</span><span class="params">(<span class="string">"F:/test"</span>)</span></span></span><br></pre></td></tr></table></figure>
+<p>注意一定要是使用反斜杠。</p>
+<p>记住这两个函数，getwd和setwd，那么就可以将工作路径设置在我们想要的任何文件夹下面了。下面我们开始介绍最为常见的几种文件格式在R语言中的读取和输出。</p>
+<h4><span id="csv文件">csv文件</span></h4>
+<p>csv文件是我们平时最为常见的文件了。全称为逗号分隔符文件。在R中，有现成的函数可以读取它。我们假设现在有一个数据，data.csv，在F盘的test文件夹中。我们现在要读取它，那么可以使用下列代码：</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#首选我们把路径设置到相应文件夹</span></span><br><span class="line">setwd(<span class="string">"F:/test"</span>)</span><br><span class="line">data &lt;- <span class="built_in">read</span>.csv(<span class="built_in">file</span> = <span class="string">"data.csv"</span>, stringsAsFactors = <span class="literal">FALSE</span>)</span><br></pre></td></tr></table></figure>
+<p>对的，就是使用read.csv函数，该函数就是用来读取csv文件的函数。他的参数有很多，我们来选几个最为常用的来说明一下，其他的可以使用?read.csv来参考官方文档</p>
+<ul>
+<li>file：就是指要读取的文件的名称，比如上面的例子就是data.csv。注意后缀名一定要在。</li>
+<li>header：是指文件是否有列名。如果设置为TRUE，则将第一行读取为该文件的列名。</li>
+<li>stringsAsFactors：是否把文件的非数值型数据读取为factor类型。一般来说，我们都不需要，如果读取之后，需要将其转换为factor类型，那么后续可以自己手动转变。<strong>因此这里一定要将该参数设置为FALSE。</strong></li>
+</ul>
+<p>那么我们怎么输出csv文件呢？这就用到另外一个函数write.csv：</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#将data数据输出为csv文件</span></span><br><span class="line"><span class="built_in">write</span>.csv(x = data, <span class="built_in">file</span> = <span class="string">"data1.csv"</span>, row.names = <span class="literal">FALSE</span>)</span><br></pre></td></tr></table></figure>
+<p>我们也来简单介绍一下write.csv函数的常见参数含义：</p>
+<ul>
+<li>x：就是你要输出的数据的名字，比如我们输出的数据是data，因此就设置为data。</li>
+<li>file：是要输出数据的文件名。比如我们将data这个数据输出为data1.csv。</li>
+<li>row.names：是指输出的csv文件的行名是否要自动加上。如果设置为TRUE，那么输出的数据会加上行名，设置为FALSE，则不会加上行名。</li>
+</ul>
+<p>一般来说，上面的read.csv和write.csv函数就可以满足大多数的csv文件的读取和输出要求了，但是如果文件很大的话，那么这两个函数就会显的速度比较慢了，因此有另外一个由wickham大神写的包readr就非常的厉害了。下面同样使用readr包读取同样的数据，大家可以自行感受一下两者速度的差异：</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#首先安装readr</span></span><br><span class="line">install.packages(<span class="string">"readr"</span>)</span><br><span class="line">library(<span class="string">"readr"</span>)</span><br><span class="line"><span class="comment">#读取数据</span></span><br><span class="line">data &lt;- read_csv(<span class="attr">file</span> = <span class="string">"data.csv"</span>)</span><br><span class="line"><span class="comment">#输出数据</span></span><br><span class="line">readr::write_csv(<span class="attr">x</span> = data, <span class="attr">path</span> = <span class="string">"data1.csv"</span>)</span><br></pre></td></tr></table></figure>
+<p>readr包中的read_csv和write_csv分别用来读取和输出数据。参数更加简洁。因此，强烈推荐大家使用这两个函数来进行数据的读取和输出。</p>
+<h4><span id="xls和xlsx">xls和xlsx</span></h4>
+<p>跟csv相比，excle表格文件就更加普遍了。一般来说，有xlx和xlsx两种文件。在这里，我们直接就推荐wicham的另外一个包，readxl包来进行这两种数据的读取和输出。</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#首先安装readxl</span></span><br><span class="line">install.packages(<span class="string">"readxl"</span>)</span><br><span class="line">library(<span class="string">"readr"</span>)</span><br><span class="line"><span class="comment">#读取数据</span></span><br><span class="line">data &lt;- readxl::read_excel(<span class="attr">path</span> = <span class="string">"data.xlsx"</span>)</span><br><span class="line"><span class="comment">#输出数据</span></span><br><span class="line">write_excel_csv(<span class="attr">x</span> = data, <span class="attr">path</span> = <span class="string">"data2.xlsx"</span>)</span><br></pre></td></tr></table></figure>
+<p>需要注意的是，write_excel_csv函数是包含在包readr中的。向大家强烈推荐这两个包用来处理csv，xlsx，xls文件的处理。</p>
+<h4><span id="text文件">text文件</span></h4>
+<p>另外一种常见文件就是txt文件了。可以使用R中自带的函数read.table。</p>
+<p>介绍一下read.table的常用参数：</p>
+<ul>
+<li>file：读取数据的名称。</li>
+<li>header：是否要把第一行变为列名，默认为FALSE。</li>
+<li>sep：列之间的分隔符是什么？默认是空格，也就是sep=&quot;&quot;，还有另外两种比较常见的，逗号，sep=&quot;,&quot;，其实就是csv文件了，还有sep=&quot;\t&quot;，也就是制表符。如果读取数据有问题的话， 可以试着改变sep来看看。</li>
+</ul>
+<h3><span id="总结">总结</span></h3>
+<p>我们常见的几种数据的读取和输出就介绍到这了，其实就两个包和一个函数，readr，readxl和read.table。所有数据及代码已放到github上，请猛戳阅读原文获得链接。</p>
 
 
 
@@ -252,12 +278,12 @@
                 <ul class="pager">
                     
                         <li class="previous">
-                            <a href="/2018/05/29/R study2/" data-toggle="tooltip" data-placement="top" title="R语言入门">&larr; Previous Post</a>
+                            <a href="/2018/05/31/metabolomics-xcms1/" data-toggle="tooltip" data-placement="top" title="基于质谱技术的非靶向䛇萆盠卂数据处理基础xcms1">&larr; Previous Post</a>
                         </li>
                     
                     
                         <li class="next">
-                            <a href="/2017/03/18/2016-11-25-metcleaning/" data-toggle="tooltip" data-placement="top" title="MetCleaning">Next Post &rarr;</a>
+                            <a href="/2018/05/30/metabolomics-is-three-bros/" data-toggle="tooltip" data-placement="top" title="代谢组学原来是三兄弟啊">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -287,7 +313,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">1. 首先，需要安装R语言.</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">2. 然后安装Rstudio。</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">3. 安装完成之后，即可打开Rsudio。Rstudio界面如下图所示。</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">4. Rstudio的简单使用。</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">数据的读取和输出</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">如何设置工作路径</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">csv文件</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">xls和xlsx</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">text文件</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">总结</span></a></li></ol>
         
         </div>
       </aside>
@@ -329,8 +355,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "shenxt";
-    var disqus_identifier = "https://omicspie.com/2018/05/28/R study1/";
-    var disqus_url = "https://omicspie.com/2018/05/28/R study1/";
+    var disqus_identifier = "https://omicspie.com/2018/05/30/R study3/";
+    var disqus_url = "https://omicspie.com/2018/05/30/R study3/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

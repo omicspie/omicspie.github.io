@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          基于质谱技术的非靶向䛇萆盠卂数据处理基础xcms1 - omicsPie | 组学派
+        
+    </title>
+
+    <link rel="canonical" href="https://omicspie.com/2018/05/31/metabolomics-xcms1/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/beantech.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('Demo.png')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#代谢组学" title="代谢组学">代谢组学</a>
+                            
+                              <a class="tag" href="/tags/#R语言" title="R语言">R语言</a>
+                            
+                              <a class="tag" href="/tags/#组学基础" title="组学基础">组学基础</a>
+                            
+                        </div>
+                        <h1>基于质谱技术的非靶向䛇萆盠卂数据处理基础xcms1</h1>
+                        <h2 class="subheading">基于质谱技术的非靶向䛇萆盠卂数据处理基础xcms1</h2>
+                        <span class="meta">
+                            Posted by omicsPie on
+                            2018-05-31
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">omicsPie</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/contact/">联系我们</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">关于组学派</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">所有文章</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/founder/">管理团队</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">标签</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>基于质谱技术的非靶向代谢组学主要用于代谢物的概括分析(profiling)， 获取样品中所含代谢物的含量信息，结合代谢物峰的注释，亦可以获取样品中所含代谢物类别。数据采集方式分为数据依赖型采集(Data Dependent Acquisition, DDA)和数据非依赖型采集(Data Independent Acquisition, DIA)两种。作为数据分析的基础，代谢物峰检测及不同样品代谢物峰对齐(peak detection &amp; alignment)是数据处理的基础。目前有很多软件利用不同的算法可以实现此目标，其中最常用的有xcms, mzMine等。在此，我们介绍基于利用xcms包进行代谢物进行基础分析的方法，与诸位探讨其中数据处理的技巧。</p>
+<h2><span id="xcms包的安装及要求">xcms包的安装及要求</span></h2>
+<p>xcms是基于R语言设计的程序包(R package)，可以通过Bioconductor进行安装。具体信息请参考https://bioconductor.org/packages/release/bioc/html/xcms.html</p>
+<h4><span id="安装bioconductor">安装Bioconductor</span></h4>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">source</span>(<span class="string">"https://bioconductor.org/biocLite.R"</span>)</span><br><span class="line">biocLite()</span><br></pre></td></tr></table></figure>
+<h4><span id="安装xcms">安装xcms</span></h4>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">biocLite(<span class="string">"xcms"</span>)</span><br></pre></td></tr></table></figure>
+<h4><span id="安装数据及其他r包">安装数据及其他R包</span></h4>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">biocLite(c(<span class="string">"faahKO"</span>, <span class="string">"MSnbase"</span>))</span><br></pre></td></tr></table></figure>
+<p>(此包包含正离子模式采集的LC-MS数据，已经转换为NetCDF数据格式，本文借用该数据以演示xcms进行基础数据处理)</p>
+<h2><span id="原始数据转换">原始数据转换</span></h2>
+<p>xcms支持xml、mzData、mzXML、mzML、netCDF等数据格式，因而在利用xcms进行数据处理之前，需要对于质谱采集的原始数据进行格式转换，一般可使用ProteoWizard等。</p>
+<h2><span id="利用xcms进行峰检测及对齐">利用xcms进行峰检测及对齐</span></h2>
+<p>(Bioconductor上已有xcms数据处理的具体指导，参见https://bioconductor.org/packages/release/bioc/vignettes/xcms/inst/doc/xcms.html)<br>
+由于xcms3对xcms中的方法名称进行了调整，对于一致使用xcms进行数据处理的用户来说可能会造成一定的困扰，目前xcms3还继续兼容大多数旧的xcms方法，但随着程序的进一步更新，势必会逐步取代过去的方法，因而，大家还是需要尽快熟悉新的方法的使用。在此，为方便大家理解，本文对同一处理分别使用新旧方法进行演示。</p>
+<h4><span id="调用r包">调用R包</span></h4>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(xcms)</span><br><span class="line"><span class="keyword">library</span>(faahKO)</span><br><span class="line"><span class="keyword">library</span>(MSnbase)</span><br></pre></td></tr></table></figure>
+<h4><span id="数据导入">数据导入</span></h4>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## Get the full path to the CDF files</span></span><br><span class="line">cdfs &lt;- dir(system.file(<span class="string">"cdf"</span>, package = <span class="string">"faahKO"</span>), full.names = <span class="literal">TRUE</span>,</span><br><span class="line">        recursive = <span class="literal">TRUE</span>)</span><br><span class="line"><span class="comment">## Create a phenodata data.frame</span></span><br><span class="line">pd &lt;- data.frame(sample_name = sub(basename(cdfs), pattern = <span class="string">".CDF"</span>,</span><br><span class="line">                   replacement = <span class="string">""</span>, fixed = <span class="literal">TRUE</span>),</span><br><span class="line">         sample_group = c(rep(<span class="string">"KO"</span>, <span class="number">6</span>), rep(<span class="string">"WT"</span>, <span class="number">6</span>)),</span><br><span class="line">         stringsAsFactors = <span class="literal">FALSE</span>)</span><br><span class="line">raw_data &lt;- readMSData(files = cdfs, pdata = new(<span class="string">"NAnnotatedDataFrame"</span>, pd),</span><br><span class="line">               mode = <span class="string">"onDisk"</span>)</span><br></pre></td></tr></table></figure>
+<p>readMSData是MSnbase包中读取质谱数据的方法，返回结果为一个属于‘OnDiskMSnExp’类的对象。</p>
+<h4><span id="利用centwave算法进行峰检测">利用centWave算法进行峰检测</span></h4>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">########################</span></span><br><span class="line"><span class="comment"># xcms 3 new methods</span></span><br><span class="line">cwp &lt;- CentWaveParam(peakwidth = c(<span class="number">30</span>, <span class="number">80</span>), noise = <span class="number">1000</span>)</span><br><span class="line">xdata &lt;- findChromPeaks(raw_data, param = cwp)</span><br><span class="line"><span class="comment">########################</span></span><br><span class="line"><span class="comment"># xcms old methods</span></span><br><span class="line">xdata &lt;- xcmsSet(cdfs, method = <span class="string">'centWave'</span>, peakwidth = c(<span class="number">30</span>, <span class="number">80</span>), noise= <span class="number">1000</span>)</span><br></pre></td></tr></table></figure>
+<p>findChromPeaks是xcms中用于进行峰检测的新方法，输入值为’OnDiskMSnExp’对象和峰检测参数对象，CentWaveParam用以创建’CentWaveParam’对象，该对象设置使用’centWave’算法进行峰检测时所需要的参数，其中比较常用的参数如下：</p>
+<ul>
+<li>ppm – 峰检测时MS1的m/z tolerance，以ppm为单位</li>
+<li>peakwidth – 长度为2的向量，设置峰检测时峰宽范围，事实上该参数对应的每个峰可以跨越多少个质谱检测的scan，而非多少秒</li>
+<li>snthresh – 峰检测时信噪比要求</li>
+<li>return.type – 返回数据类型，可以根据要求返回’XCMSnExp’类数据（默认）、传统的’xcmsSet’类以及’list’</li>
+</ul>
+<p>xcmsSet是xcms中可以用于峰检测的传统方法，使用method参数设置峰检测算法，另外根据不同的峰检测算法可以设置该算法需要的参数，详情请参考xcms官方文档。其中’centWave’算法所对应的参数与’CentWaveParam’设置基本一致。</p>
+<p>峰检测时除了可以使用centWave算法外，还可以使用其他算法，如’centWaveWithPredIsoROIs’、‘massifquant’、‘matchedFilter’、‘MSW’等，分别对应’CentWavePredIsoParam’、‘MassifquantParam’、‘MatchedFilterParam’、'MSWParam’参数设置，详情请参考xcms官方文档或者使用R help</p>
+<h4><span id="峰对齐及分组peak-alignment-amp-grouping">峰对齐及分组(peak alignment &amp; grouping)</span></h4>
+<p>同一代谢物在不同样品的流出时间会略有差异，因而对于峰检测的结果需要进行对齐(alignment)并将不同样品中的统一代谢物分到各自可以表征该代谢物的峰组(peak group)中(代谢组学中一般成为feature)，从而进一步比较不同样品间统一代谢物的含量。通常我们可以使用’obiwarp’算法进行peak alignment，然后利用’density’算法进行peak grouping.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">########################</span></span><br><span class="line"><span class="comment"># xcms 3 new methods</span></span><br><span class="line"><span class="comment">## Correspondence: group peaks across samples.</span></span><br><span class="line">pdp &lt;- PeakDensityParam(sampleGroups = xdata$sample_group,</span><br><span class="line">            minFraction = <span class="number">0.8</span>)</span><br><span class="line">xdata &lt;- groupChromPeaks(xdata, param = pdp)</span><br><span class="line"><span class="comment">## Now the retention time correction.</span></span><br><span class="line">pgp &lt;- PeakGroupsParam(minFraction = <span class="number">0.85</span>)</span><br><span class="line"><span class="comment">## Get the peak groups that would be used for alignment.</span></span><br><span class="line"><span class="comment"># (grouping with 'peakgroup' method)</span></span><br><span class="line">xdata &lt;- adjustRtime(xdata, param = pgp)</span><br><span class="line"><span class="comment"># otherwise, one can also use 'Obi-warp' method for alignment</span></span><br><span class="line">xdata &lt;- adjustRtime(xdata, param = ObiwarpParam(binSize = <span class="number">0.6</span>))</span><br><span class="line"><span class="comment">## Grouping with RT corrected peaks</span></span><br><span class="line">pdp &lt;- PeakDensityParam(sampleGroups = xdata$sample_group,</span><br><span class="line">                        minFraction = <span class="number">0.4</span>, bw = <span class="number">20</span>)</span><br><span class="line">xdata &lt;- groupChromPeaks(xdata, param = pdp)</span><br><span class="line"><span class="comment">########################</span></span><br><span class="line"><span class="comment"># xcms old methods</span></span><br><span class="line">xdata &lt;- xcms::group(xdata, minfrac = <span class="number">0.8</span>)</span><br><span class="line">xdata&lt;- retcor(xdata, method = <span class="string">'peakgroups'</span>, plottype = <span class="string">'deviation'</span>)</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">xdata&lt;- retcor(xdata, method = <span class="string">'obiwarp'</span>, plottype = <span class="string">'deviation'</span>, profStep = <span class="number">0.6</span>)</span><br><span class="line">xdata&lt;- xcms::group(xdata, bw = <span class="number">20</span>, minfrac =<span class="number">0.85</span>, minfrac = <span class="number">0.4</span>)</span><br></pre></td></tr></table></figure>
+<h4><span id="峰补齐gap-filling">峰补齐(gap filling)</span></h4>
+<p>对于峰检测过程中会有部分feature在某些样品中未检出对应代谢物峰的清醒，xcms可以根据已检出feature的信息，在相应样品中强行提取EIC信息，从而计算该代谢物在该样品中的含量信息，我们一般称之为filling gaps</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">########################</span></span><br><span class="line"><span class="comment"># xcms 3 new method</span></span><br><span class="line">xdata &lt;- fillChromPeaks(xdata)</span><br><span class="line"><span class="comment">########################</span></span><br><span class="line"><span class="comment"># xcms old methods</span></span><br><span class="line">xdata &lt;-fillPeaks(xdata)</span><br></pre></td></tr></table></figure>
+<p>如此，对于一组代谢物样品的峰检测已经全部完成。</p>
+<p>对比xcms用于峰检测的新方法和就方法，我们可以发现新方法在命名方面更加直白，可以根据方法名称直接了解该方法所使用的算法，而在以前的峰检测方法中，这些算法均整合在数据处理的过程中。两种方式格局优劣，新方法意义明确，但是在处理时需要更多的参数设置过程，而旧方法数据处理过程更加简洁，但需要对xcms熟练度要求较高。</p>
+<h2><span id="预告">预告</span></h2>
+<p>接下来我们会介绍如何从峰检测结果中提取需要的信息以用来进行下一步的统计分析</p>
+
+
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2018/06/01/meet-your-object/" data-toggle="tooltip" data-placement="top" title="遇见，你的专属对象">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/05/30/R study3/" data-toggle="tooltip" data-placement="top" title="数据读取和输出">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">xcms包的安装及要求</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.0.1.</span> <span class="toc-nav-text">安装Bioconductor</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.0.2.</span> <span class="toc-nav-text">安装xcms</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.0.3.</span> <span class="toc-nav-text">安装数据及其他R包</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">原始数据转换</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">利用xcms进行峰检测及对齐</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.0.1.</span> <span class="toc-nav-text">调用R包</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.0.2.</span> <span class="toc-nav-text">数据导入</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.0.3.</span> <span class="toc-nav-text">利用centWave算法进行峰检测</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.0.4.</span> <span class="toc-nav-text">峰对齐及分组(peak alignment &amp; grouping)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.0.5.</span> <span class="toc-nav-text">峰补齐(gap filling)</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">预告</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+
+
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://shenxt.me/" target="_blank">Shen blog</a></li>
+                    
+                        <li><a href="http://www.zhulab.cn/" target="_blank">Zhu lab</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "shenxt";
+    var disqus_identifier = "https://omicspie.com/2018/05/31/metabolomics-xcms1/";
+    var disqus_url = "https://omicspie.com/2018/05/31/metabolomics-xcms1/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/shen-zu-tao-73">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/omicspie">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/shenxt">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+
+
+                
+                    <li>
+                        <a target="_blank"  href="http://ow5z7hup5.bkt.clouddn.com/qrcode_for_gh_5f4396a2e4c3_430.jpg">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-qq fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="http://ow5z7hup5.bkt.clouddn.com/wechatid.jpg">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weixin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; omicsPie 2018 <br>
+                    联系电话: +86 15821606469 <br>
+                    邮箱: omicspie@163.com <br>
+                    地址: 上海市浦东新区张江高科技园区秋月路26号6号楼209室
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://omicspie.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '4cc1f2d8f3067386cc5cdb626a202900';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://omicspie.com/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
