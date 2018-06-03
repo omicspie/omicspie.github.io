@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          R语言大利器之Rstudio安装 - omicsPie | 组学派
+          数据读脂质组学入门篇：葵花宝典，初入江湖 - omicsPie | 组学派
         
     </title>
 
-    <link rel="canonical" href="https://omicspie.com/2018/05/28/R study1/">
+    <link rel="canonical" href="https://omicspie.com/2018/06/02/lipidomics1/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -86,16 +86,16 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#R语言" title="R语言">R语言</a>
-                            
                               <a class="tag" href="/tags/#组学基础" title="组学基础">组学基础</a>
                             
+                              <a class="tag" href="/tags/#脂质组学" title="脂质组学">脂质组学</a>
+                            
                         </div>
-                        <h1>R语言大利器之Rstudio安装</h1>
-                        <h2 class="subheading">R语言大利器之Rstudio安装</h2>
+                        <h1>数据读脂质组学入门篇：葵花宝典，初入江湖</h1>
+                        <h2 class="subheading">脂质组学入门篇：葵花宝典，初入江湖</h2>
                         <span class="meta">
                             Posted by omicsPie on
-                            2018-05-28
+                            2018-06-02
                         </span>
                     </div>
                 
@@ -226,24 +226,47 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>俗话说，工欲善其事，必先利其器，R语言就有这么一件利器。很多第一次接触R语言的人，无不被R语言自带的IDE（集成开发环境）逼疯，甚至望而却步，对R语言好感尽失。虽然也有其他的IDE出现，但是不得不说，Rstudio的出现，大大拯救了那些在R语言苦海学习中的人。Rstudio是美国Rstudio公司开发的，界面简单，炫酷，实用，是R语言学习使用的利器。下面简单介绍一下怎么安装Rsudio，后面会再陆续介绍一些Rstudio的其他知识。</p>
-<h3><span id="1-首先需要安装r语言">1. 首先，需要安装R语言.</span></h3>
-<p>已安装的可以直接跳过该步骤。直接在<a href="https://cran.r-project.org/mirrors.html" target="_blank" rel="noopener">R官网上下载最新版本</a>，选择中国的镜像，比如清华大学(<a href="https://mirrors.tuna.tsinghua.edu.cn/CRAN/" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/CRAN/</a>),然后选择适合自己系统的包，下载安装即可。</p>
-<p><img src="R%E4%B8%8B%E8%BD%BD.png" alt=""></p>
-<h3><span id="2-然后安装rstudio">2. 然后安装Rstudio。</span></h3>
-<p>到<a href="https://www.rstudio.com/products/rstudio/download/#download" target="_blank" rel="noopener">Rstudio官网</a>，选择适合自己系统的Rstudio包，下载，然后安装即可。</p>
-<p><img src="Rstudio%E4%B8%8B%E8%BD%BD.png" alt=""></p>
-<h3><span id="3-安装完成之后即可打开rsudio-rstudio界面如下图所示">3. 安装完成之后，即可打开Rsudio。Rstudio界面如下图所示。</span></h3>
-<p><img src="Rstudio.png" alt=""></p>
-<p>Rstudio一共有四个panel，其中左上角为source，是打开自己脚本以及文件的窗口。左下角为Console，也就是控制台，是直接输入代码的地方，输入代码之后，直接回车，就会返回运算结果。右上角为显示你的环境变量，输入历史，以及其他功能，如编译包，github代码控制等窗口。有下家为显示文件以及图片的窗口。</p>
-<h3><span id="4-rstudio的简单使用">4. Rstudio的简单使用。</span></h3>
-<p>创建R脚本，直接点击左上角的绿色加号，选择R script，即可创建一个R语言脚本。</p>
-<p><img src="%E5%88%9B%E5%BB%BAscript.png" alt=""></p>
-<p>创建好的脚本是没有名字的，默认为Untitled1。</p>
-<p><img src="script.png" alt=""></p>
-<p>然后就可以在这里面写入脚本，代码。<br>
-到现在为止，就学会了Rstudio的安装和简单使用。后面，我们会有一篇文章再来详细介绍Rstudio的使用。<br>
-如果你想学习R语言的使用以及与任何组学相关的只是，请关注我们。如果有任何问题，请给我们留言或者发送邮件，omicschina@163.com，也可以加入我们的QQ群，182971123和我们交流。</p>
+                <blockquote>
+<p>开篇第一句：欲练此功，必先……</p>
+</blockquote>
+<blockquote>
+<p>必先关注公众号，潜心科研。（想啥呢，诸位看官……）</p>
+</blockquote>
+<p>《葵发宝典之脂质组学入门篇》系混迹脂质组分析x年的小编为人民服务所编（著），本章节将主要介绍入门知识，什么是脂质组学，为什么要做脂质组，及常用的（不花钱的）脂质数据库或工具。进阶篇将介绍脂质组的研究手段和分析策略。高阶篇将介绍脂质组的应用案例和大师剖析。（如果你有脂质组分析的疑问，可以留言告知小编。）</p>
+<p>-------------------------啥是脂质组学？</p>
+<p>2003年韩贤林教授等首次提出脂质组学的概念，即对生物体系脂质进行全面系统的分析。它主要研究生物体系(生物体、组织、细胞甚至亚细胞)受刺激或扰动后，脂质种类、亚种类或单个脂质分子的变化。</p>
+<p>脂类作为脂质组学研究的内容，依据“脂质代谢途径研究计划”(LIPIDMAPS)可分为八大类：脂肪酸类（Fatty Acyls），甘油脂类（Glycerolipids），甘油磷脂类（Glycerophospholipids），鞘脂类（Sphingolipids），固醇类（Sterol Lipids），异戊烯醇类（Prenol Lipids），糖酯类（Saccharolipids），多聚乙烯类（Polyketides）。总的来说，脂类具有数目众多、结构多样的特点，这就给脂质组分析带来了一定的难度。</p>
+<p>（PS小伙伴如果对各类脂质等好奇的话，留言留言，小编也可以搞搞番外篇来说说这些个东东，一切本着为人民服务，建设祖国的宗旨~~）</p>
+<p>------------------------------为啥做脂质组？</p>
+<p>为啥做脂质组呢？</p>
+<p>因为火啊！！！</p>
+<p>近几年，脂质组相关的文章，其发表的数目呈火箭式增长。究其原因，脂质组学发展促进了脂质功能研究，大家越来越多地认识到除了蛋白质，代谢物或者脂质分子在生命体中也发挥重要作用。大家最熟知的脂质功能，就是调控膜的物理化学性质，比如影响膜的曲率进而调控膜重构的过程。图样图森破。。。脂质功能实质非常强大！除了是构成膜的主要成分外，它还具有能量存储，信号转导的功能，此外某些特定类型的脂质还具有特定的功能，比如缩醛磷脂的抗氧化作用，肉毒碱的穿梭循环系统，心磷脂参与的线粒体呼吸作用等等。</p>
+<p>(小编推荐几篇综述，感兴趣的小伙伴邮箱留言，将以邮件的形式发送给您~)</p>
+<p>---------有啥推荐的脂质数据库或工具？</p>
+<p>这个就厉害啦，好用还不花钱~~</p>
+<h3><span id="1lipid-maps">1，LIPID MAPS</span></h3>
+<p>网址：<a href="http://www.lipidmaps.org/" target="_blank" rel="noopener">http://www.lipidmaps.org/</a></p>
+<p>推荐：五颗星</p>
+<p>LipidMAPS是美国国立卫生院推进的“脂质代谢途径研究计划”，涵盖目前最权威的脂类分类、命名法和结构信息，还囊括了众多的脂质组定性定量方法。此外，它还提供了一些生物信息学分析工具，比如基于质谱的脂质定性工具，通过给定特定的m/z，或特征子离子信息，或二级谱图信息，可以预测可能的脂质分子；又比如可以管理、可视化及编辑脂质信号通路等。</p>
+<p>不管做不做脂质组分析，都建议您先收藏，有利器，才好闯江湖~</p>
+<h3><span id="2-avanti">2， Avanti</span></h3>
+<p>网址：<a href="https://avantilipids.com/" target="_blank" rel="noopener">https://avantilipids.com/</a></p>
+<p>推荐：四颗星</p>
+<p>Avanti Polar Lipids以出售高纯度的脂质标准品闻名，包含定性、定量（氘代）及成像（荧光基团标记）所需的各类脂质分子。此外，它还提供了非常实用的技术支持，包括脂质体制备方案、脂质-DNA制备方案、脂质提取方案等。</p>
+<p>如果您实验过程中涉及脂质相关实验，建议您收藏，有备无患~</p>
+<h3><span id="3lipidimms-analyzer">3，LipidIMMS Analyzer</span></h3>
+<p>网址：<a href="http://imms.zhulab.cn/LipidIMMS/" target="_blank" rel="noopener">http://imms.zhulab.cn/LipidIMMS/</a></p>
+<p>推荐：五颗星</p>
+<p>LipidIMMS Analyzer是国内知名代谢组学专家朱正江课题组提供的自动化数据处理和脂质鉴定的开源网站，可以处理多种类型的基于质谱的数据，内嵌271，114个脂质分子及化学结构信息，包含精确质量数（m/z）数据库，保留时间（RT）数据库，碰撞截面积（CCS）数据库和二级质谱图（MS/MS）数据库，其简单易操作的可视化界面可以帮助小伙伴快速入门脂质组。</p>
+<p>小编良心推荐，必须收藏！！</p>
+<h3><span id="4-lipidbank">4， LipidBank</span></h3>
+<p>网址：<a href="http://lipidbank.jp/" target="_blank" rel="noopener">http://lipidbank.jp/</a></p>
+<p>推荐：三颗星</p>
+<h3><span id="5-lipid-library">5， Lipid Library</span></h3>
+<p>网址：<a href="http://lipidlibrary.aocs.org/index.cfm" target="_blank" rel="noopener">http://lipidlibrary.aocs.org/index.cfm</a></p>
+<p>推荐：三颗星</p>
+<p>说了这么多，小编都有点困了，饿了困了，喝瓶奶……可是产品琳琅满目，高温灭菌奶、调制乳、营养强化奶……哪一种才能喝出健康，喝出科研灵感呢？</p>
+<p>不怕不怕，接下来的进阶篇将介绍脂质组的研究手段和分析策略，测个牛奶中的脂质组，小意思啦~妈妈再也不用担心我的科研做不好啦~</p>
 
 
 
@@ -251,13 +274,9 @@
                 <!-- Pager -->
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2018/05/29/R study2/" data-toggle="tooltip" data-placement="top" title="R语言入门">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2017/03/18/2017-09-09-metdna-blog/" data-toggle="tooltip" data-placement="top" title="MetDNA instruction">Next Post &rarr;</a>
+                            <a href="/2018/06/01/meet-your-object/" data-toggle="tooltip" data-placement="top" title="遇见，你的专属对象">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -287,7 +306,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">1. 首先，需要安装R语言.</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">2. 然后安装Rstudio。</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">3. 安装完成之后，即可打开Rsudio。Rstudio界面如下图所示。</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">4. Rstudio的简单使用。</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">1，LIPID MAPS</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">2， Avanti</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">3，LipidIMMS Analyzer</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">4， LipidBank</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">5， Lipid Library</span></a></li></ol>
         
         </div>
       </aside>
@@ -329,8 +348,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "shenxt";
-    var disqus_identifier = "https://omicspie.com/2018/05/28/R study1/";
-    var disqus_url = "https://omicspie.com/2018/05/28/R study1/";
+    var disqus_identifier = "https://omicspie.com/2018/06/02/lipidomics1/";
+    var disqus_url = "https://omicspie.com/2018/06/02/lipidomics1/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
